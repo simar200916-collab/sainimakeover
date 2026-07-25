@@ -234,8 +234,8 @@ section{position:relative;padding:130px clamp(20px,6vw,80px);}
 .ba-wrap{max-width:760px;margin:0 auto;}
 .ba-slider{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);user-select:none;}
 .ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
-.ba-before{background:linear-gradient(135deg,#241019,#170a0f);}
-.ba-after{background:linear-gradient(135deg,#3a2410,#170a0f 70%);}
+.ba-before{background:url('photos/hair-ba.jpg') left center/200% auto no-repeat;}
+.ba-after{background:url('photos/hair-ba.jpg') right center/200% auto no-repeat;}
 .ba-after{clip-path:inset(0 0 0 50%);}
 .ba-label{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--champagne);}
 .ba-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(243,232,216,0.5);}
@@ -257,13 +257,18 @@ input.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor
 @media(max-width:700px){.gal-grid{columns:2 160px;}}
 .gal-item{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
 .gal-item .ph{
-  width:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:20px;
+  width:100%;position:relative;overflow:hidden;
   aspect-ratio:var(--r,3/4);
 }
-.gal-item .ph svg{width:30px;height:30px;color:var(--champagne);opacity:.8;}
-.gal-item .ph span{font-family:var(--serif);font-style:italic;font-size:14px;color:rgba(243,232,216,0.7);text-align:center;}
-.gal-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,0.5));opacity:0;transition:opacity .3s;}
-.gal-item:hover::after{opacity:1;}
+.gal-item .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.gal-item:hover .ph img{transform:scale(1.06);}
+.gal-item .ph span{
+  position:absolute;bottom:0;left:0;right:0;padding:18px 14px 14px;
+  background:linear-gradient(to top,rgba(23,10,15,0.82),transparent);
+  font-family:var(--serif);font-style:italic;font-size:14px;color:var(--cream);
+  opacity:0;transition:opacity .3s ease;
+}
+.gal-item:hover .ph span{opacity:1;}
 
 /* ---------- Testimonials ---------- */
 .testimonials{background:linear-gradient(180deg,var(--ink),var(--burgundy-deep),var(--ink));text-align:center;}
@@ -925,18 +930,24 @@ setBA(50);
 
 /* ---------- Gallery generation ---------- */
 const galleryData = [
-  {cat:'hair', label:'Global Colour', r:'3/4'},
-  {cat:'makeup', label:'Bridal Glam', r:'4/5'},
-  {cat:'mehndi', label:'Bridal Mehndi', r:'3/4'},
-  {cat:'nails', label:'Chrome Finish', r:'1/1'},
-  {cat:'skin', label:'Gold Facial Glow', r:'4/5'},
-  {cat:'hair', label:'Keratin Smoothening', r:'4/5'},
-  {cat:'makeup', label:'HD Reception Look', r:'3/4'},
-  {cat:'mehndi', label:'Engagement Mehndi', r:'1/1'},
-  {cat:'nails', label:'French Elegance', r:'4/5'},
-  {cat:'hair', label:'Hair Botox Result', r:'3/4'},
-  {cat:'skin', label:'Hydra Facial', r:'1/1'},
-  {cat:'makeup', label:'Airbrush Bridal', r:'4/5'},
+  {cat:'hair',   img:'photos/hair-braid.jpg',      label:'Bridal Braid Updo',     r:'3/4'},
+  {cat:'makeup', img:'photos/makeup-lehenga.jpg',  label:'Bridal Glam',           r:'3/4'},
+  {cat:'nails',  img:'photos/nails-red-bangles.jpg', label:'Bridal Red Nails',    r:'4/5'},
+  {cat:'mehndi', img:'photos/mehndi-hands2.jpg',   label:'Full Hand Mehndi',      r:'4/5'},
+  {cat:'hair',   img:'photos/hair-curly.jpg',      label:'Curly Half-Up',         r:'4/5'},
+  {cat:'nails',  img:'photos/nails-pink-marble.jpg', label:'Pink Shimmer',        r:'3/4'},
+  {cat:'makeup', img:'photos/makeup-pink-suit.jpg', label:'Party Makeup',         r:'3/4'},
+  {cat:'mehndi', img:'photos/mehndi-hands1.jpg',   label:'Floral Mehndi',         r:'4/5'},
+  {cat:'nails',  img:'photos/nails-red-floral1.jpg', label:'Red Floral Art',      r:'3/4'},
+  {cat:'hair',   img:'photos/hair-straight2.jpg',  label:'Keratin Result',        r:'4/5'},
+  {cat:'nails',  img:'photos/nails-burgundy.jpg',  label:'Burgundy Glam',         r:'4/5'},
+  {cat:'makeup', img:'photos/makeup-blue-suit.jpg', label:'Classic Full Look',    r:'4/5'},
+  {cat:'nails',  img:'photos/nails-nude.jpg',       label:'Nude Nail Art',        r:'3/4'},
+  {cat:'mehndi', img:'photos/mehndi-design.jpg',   label:'Bridal Mehndi Design',  r:'3/4'},
+  {cat:'nails',  img:'photos/nails-red-floral2.jpg', label:'Floral Tips',         r:'4/5'},
+  {cat:'hair',   img:'photos/hair-straight1.jpg',  label:'Silky Straight',        r:'4/5'},
+  {cat:'nails',  img:'photos/nails-pink-glitter.jpg', label:'Pink Glitter',       r:'4/5'},
+  {cat:'nails',  img:'photos/nails-red-art.jpg',   label:'Red Rose Art',          r:'3/4'},
 ];
 const icons = {
   hair:'<path d="M6 3c4 0 4 4 6 4s2-4 6-4c-1 6 1 8-1 12-1 2-3 2-4 6-1-4-3-4-4-6-2-4 0-6-1-2 0 0-3-4-2-10Z"/>',
@@ -951,7 +962,7 @@ function renderGallery(filter){
   galleryData.filter(g => filter==='all' || g.cat===filter).forEach(g=>{
     const div = document.createElement('div');
     div.className = 'gal-item';
-    div.innerHTML = `<div class="ph" style="--r:${g.r}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">${icons[g.cat]}</svg><span>${g.label}</span></div>`;
+    div.innerHTML = `<div class="ph" style="--r:${g.r}"><img src="${g.img}" alt="${g.label}" loading="lazy"><span>${g.label}</span></div>`;
     galGrid.appendChild(div);
   });
 }
