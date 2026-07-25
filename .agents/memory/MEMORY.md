@@ -1,0 +1,1 @@
+- [Static-site runtime](static-site-runtime.md) — imported static sites may need a Nix-provided runtime in the workflow when language commands are absent from PATH.
