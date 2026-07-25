@@ -452,6 +452,25 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
 }
+
+/* ---------- Service item expandable ---------- */
+.service-item{cursor:pointer;}
+.service-item .expand-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .38s ease, opacity .3s ease;
+  opacity:0;
+}
+.service-item.open .expand-body{opacity:1;}
+.service-item .book-this{
+  display:inline-block;margin-top:14px;padding:9px 22px;
+  background:linear-gradient(120deg,var(--champagne),var(--rosegold));
+  color:var(--ink);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:600;border-radius:2px;
+  transition:letter-spacing .25s ease;
+}
+.service-item .book-this:hover{letter-spacing:2.4px;}
+
+/* ---------- About photo clickable ---------- */
+.about-visual img{cursor:zoom-in;}
 </style>
 </head>
 <body>
@@ -1058,6 +1077,38 @@ function closeLightbox(){
 lbClose.addEventListener('click', closeLightbox);
 lbEl.addEventListener('click', e=>{ if(e.target === lbEl) closeLightbox(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+
+/* ---------- About photo → lightbox ---------- */
+const aboutPhoto = document.querySelector('.about-visual img');
+if(aboutPhoto){
+  aboutPhoto.addEventListener('click', ()=> openLightbox(aboutPhoto.src, 'Saini Makeover Beauty Salon'));
+}
+
+/* ---------- Service item expand on click ---------- */
+document.querySelector('.services').addEventListener('click', e=>{
+  const item = e.target.closest('.service-item');
+  if(!item) return;
+  const isOpen = item.classList.contains('open');
+  // Close siblings in same list
+  item.closest('.service-list').querySelectorAll('.service-item.open').forEach(el=>{
+    el.classList.remove('open');
+    const b = el.querySelector('.expand-body');
+    if(b) b.style.maxHeight = '0';
+  });
+  if(!isOpen){
+    if(!item.querySelector('.expand-body')){
+      const svcName = item.querySelector('h4').textContent;
+      const body = document.createElement('div');
+      body.className = 'expand-body';
+      body.innerHTML = `<a href="#booking" class="book-this" onclick="setTimeout(()=>document.getElementById('booking').scrollIntoView({behavior:'smooth'}),50)">Book — ${svcName}</a>`;
+      item.appendChild(body);
+    }
+    item.classList.add('open');
+    const body = item.querySelector('.expand-body');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+});
+
 renderGallery('all');
 document.querySelectorAll('.tab-btn[data-gal]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
