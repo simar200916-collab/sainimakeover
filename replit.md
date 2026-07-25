@@ -1,23 +1,28 @@
 # Saini Makeover Beauty Salon
 
-A single-page website for Saini Makeover Beauty Salon, Panjaur — featuring luxury hair, skin, makeup, mehndi, and nail artistry by Navpreet Kaur.
+A luxury single-page website for **Saini Makeover Beauty Salon**, Panjaur (near Panjpeer), by Navpreet Kaur.
 
 ## Stack
-
-- Pure HTML/CSS/JavaScript (no build step, no framework)
-- GSAP + ScrollTrigger for animations
+- Pure HTML / CSS / JavaScript — no build step, no dependencies
+- GSAP (CDN) for scroll animations
 - Google Fonts (Cormorant Garamond, Playfair Display, Poppins)
 
-## Running the project
+## Structure
+- `index.html` — entire site (all HTML, CSS, and JS in one file)
+- `photos/` — all site images (gallery, before/after, logo, etc.)
+- `attached_assets/` — original uploaded reference photos
 
+## How to run
 The site is served with Python's built-in HTTP server:
-
 ```
 python3 -m http.server 5000
 ```
+The **Start application** workflow handles this automatically.
 
-The "Start application" workflow handles this automatically. Open the preview pane to see the site.
+## Key details
+- Phone / WhatsApp: **+91 7696304473**
+- Location: Panjaur, near Panjpeer
+- Owner: Navpreet Kaur (Founder & Lead Artist)
 
-## Files
-
-- `index.html` — the entire site (HTML, CSS, and JS are all self-contained in this file)
+## User preferences
+- Keep all site content in a single `index.html` file unless asked to split it out.
