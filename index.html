@@ -110,10 +110,22 @@ nav.links a:hover::after{width:100%;}
 .hero::before{
   content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 20% 15%, rgba(193,134,125,0.16), transparent 55%),
-    radial-gradient(ellipse at 85% 80%, rgba(216,179,120,0.14), transparent 55%),
-    linear-gradient(180deg, var(--ink) 0%, var(--burgundy-deep) 55%, var(--ink) 100%);
-  z-index:-2;
+    radial-gradient(ellipse at 20% 15%, rgba(193,134,125,0.18), transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(216,179,120,0.16), transparent 55%),
+    linear-gradient(180deg, rgba(23,10,15,0.72) 0%, rgba(42,7,22,0.60) 55%, rgba(23,10,15,0.78) 100%);
+  z-index:-1;
+}
+
+/* Hero background video */
+.hero-video-bg{
+  position:absolute;inset:0;overflow:hidden;z-index:-2;background:var(--ink);
+}
+.hero-video-bg iframe{
+  position:absolute;top:50%;left:50%;
+  width:177.78vh;height:100vh;
+  min-width:100%;min-height:56.25vw;
+  transform:translate(-50%,-50%);
+  border:none;pointer-events:none;
 }
 .hero-paisley{
   position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:.35;
@@ -564,6 +576,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
+  <div class="hero-video-bg">
+    <iframe
+      src="https://www.youtube.com/embed/yeII1NHg2oE?autoplay=1&mute=1&loop=1&playlist=yeII1NHg2oE&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&start=10"
+      allow="autoplay; encrypted-media"
+      title="Beauty Salon Background">
+    </iframe>
+  </div>
   <svg class="hero-paisley" viewBox="0 0 800 800" fill="none">
     <path d="M400 60C300 160 220 200 220 340C220 460 310 540 400 620C490 540 580 460 580 340C580 200 500 160 400 60Z" stroke="#d8b378" stroke-width="0.6" opacity="0.5"/>
     <circle cx="400" cy="340" r="230" stroke="#c1867d" stroke-width="0.4" opacity="0.35"/>
