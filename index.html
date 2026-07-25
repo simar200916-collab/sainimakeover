@@ -84,8 +84,11 @@ header.scrolled{
   background:rgba(23,10,15,0.82);
   border-bottom:1px solid var(--line);
 }
-.logo{display:flex;align-items:center;}
-.logo-img{height:54px;width:54px;object-fit:contain;border-radius:50%;background:#111;}
+.logo{display:flex;align-items:center;gap:12px;min-width:0;}
+.logo-img{height:54px;width:54px;object-fit:cover;object-position:center;border-radius:50%;background:#111;border:1px solid rgba(216,179,120,0.45);box-shadow:0 4px 18px rgba(0,0,0,0.28);}
+.logo-wordmark{display:flex;flex-direction:column;gap:2px;line-height:1;text-transform:uppercase;white-space:nowrap;}
+.logo-wordmark strong{font-family:var(--serif);font-size:17px;font-weight:500;letter-spacing:1.6px;color:var(--cream);}
+.logo-wordmark small{font-size:8px;letter-spacing:2.4px;color:var(--champagne);}
 nav.links{display:flex;gap:34px;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;}
 nav.links a{position:relative;opacity:.85;transition:opacity .3s;}
 nav.links a:hover{opacity:1;}
@@ -389,7 +392,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 .floaters{position:fixed;right:24px;bottom:24px;display:flex;flex-direction:column;gap:12px;z-index:90;}
 .fab{
   width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 24px rgba(0,0,0,0.4);transition:transform .3s ease;
+  flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.4);transition:transform .3s ease;
 }
 .fab:hover{transform:scale(1.08);}
 .fab.whatsapp{background:#25D366;color:#fff;}
@@ -414,6 +417,10 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
   .field input,.field select,.field textarea{font-size:16px;}
 }
 @media(max-width:560px){
+  .logo{gap:9px;}
+  .logo-img{height:48px;width:48px;}
+  .logo-wordmark strong{font-size:14px;letter-spacing:1.2px;}
+  .logo-wordmark small{font-size:7px;letter-spacing:1.8px;}
   .cat-grid{grid-template-columns:1fr;}
   .foot-grid{grid-template-columns:1fr;}
   section{padding:72px 18px;}
@@ -432,13 +439,20 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
   .gal-grid{columns:2 140px;column-gap:12px;}
   .foot-grid{gap:36px;}
   footer{padding:56px 18px 24px;}
-  .floaters{right:16px;bottom:16px;gap:10px;}
+  .floaters{
+    right:max(14px, env(safe-area-inset-right));
+    bottom:max(14px, env(safe-area-inset-bottom));
+    gap:9px;
+  }
   .fab{width:46px;height:46px;}
   .book-quick{gap:10px;}
   .quick-link{padding:14px 16px;}
 }
 @media(max-width:400px){
+  .logo{gap:7px;}
   .logo-img{height:42px;width:42px;}
+  .logo-wordmark strong{font-size:12px;letter-spacing:1px;}
+  .logo-wordmark small{font-size:6px;letter-spacing:1.35px;}
   header{padding:16px 16px;}
   header.scrolled{padding:10px 16px;}
   .hero h1{letter-spacing:0;}
@@ -549,6 +563,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 <header id="siteHeader">
   <a href="#home" class="logo">
     <img src="photos/logo.jpg" alt="Saini Makeover Logo" class="logo-img">
+    <span class="logo-wordmark"><strong>Saini Makeover</strong><small>Beauty Salon</small></span>
   </a>
   <nav class="links">
     <a href="#about">About</a>
@@ -686,6 +701,10 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       <div class="service-item"><span class="num">08</span><h4>Highlights</h4><p>Dimension &amp; face-framing tones</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
       <div class="service-item"><span class="num">09</span><h4>Hair Botox</h4><p>Deep repair without the flat-iron</p><span class="price">From ₹3,999</span><span class="arrow">→</span></div>
       <div class="service-item"><span class="num">10</span><h4>Protein Treatment</h4><p>Strength &amp; elasticity restored</p><span class="price">From ₹999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">11</span><h4>Hair Glossing</h4><p>Mirror shine and refreshed tone</p><span class="price">From ₹1,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">12</span><h4>Scalp Detox</h4><p>Clarifying cleanse for healthy roots</p><span class="price">From ₹699</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">13</span><h4>Bridal Hairstyle</h4><p>Updos, braids and veil-ready styling</p><span class="price">From ₹1,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">14</span><h4>Hair Extensions</h4><p>Length, volume and seamless blending</p><span class="price">On Consultation</span><span class="arrow">→</span></div>
     </div>
   </div>
 
@@ -699,6 +718,12 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       <div class="service-item"><span class="num">06</span><h4>Skin Whitening Facial</h4><p>Deep brightening therapy</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
       <div class="service-item"><span class="num">07</span><h4>Hydra Facial</h4><p>Deep hydration, instant glow</p><span class="price">From ₹1,799</span><span class="arrow">→</span></div>
       <div class="service-item"><span class="num">08</span><h4>D-Tan</h4><p>Sun damage reversed, tone restored</p><span class="price">From ₹499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">09</span><h4>Oxy Facial</h4><p>Oxygen infusion for a fresh glow</p><span class="price">From ₹1,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">10</span><h4>Acne Care</h4><p>Calming treatment for clearer skin</p><span class="price">From ₹999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">11</span><h4>Skin Polishing</h4><p>Gentle resurfacing and smooth texture</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">12</span><h4>Under-Eye Care</h4><p>Cooling ritual for a rested look</p><span class="price">From ₹699</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">13</span><h4>Body Polish</h4><p>Soft, luminous finish from shoulder to toe</p><span class="price">From ₹1,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">14</span><h4>Sheet Mask Therapy</h4><p>Quick hydration before your occasion</p><span class="price">From ₹299</span><span class="arrow">→</span></div>
     </div>
   </div>
 
