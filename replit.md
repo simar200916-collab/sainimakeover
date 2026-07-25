@@ -21,7 +21,7 @@ The **Start application** workflow handles this automatically.
 
 ## Key details
 - Phone / WhatsApp: **+91 7696304473**
-- Location: Panjaur, near Panjpeer
+- Location: Saini Makeover Beauty Salon, near Sansoya Sweet Shop, Panjaur
 - Owner: Navpreet Kaur (Founder & Lead Artist)
 
 ## User preferences
