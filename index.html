@@ -120,12 +120,12 @@ nav.links a:hover::after{width:100%;}
 .hero-video-bg{
   position:absolute;inset:0;overflow:hidden;z-index:-2;background:var(--ink);
 }
-.hero-video-bg iframe{
+.hero-video-bg video{
   position:absolute;top:50%;left:50%;
-  width:177.78vh;height:100vh;
-  min-width:100%;min-height:56.25vw;
+  width:100%;height:100%;
+  min-width:100%;min-height:100%;
   transform:translate(-50%,-50%);
-  border:none;pointer-events:none;
+  object-fit:cover;pointer-events:none;
 }
 .hero-paisley{
   position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:.35;
@@ -577,11 +577,9 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
   <div class="hero-video-bg">
-    <iframe
-      src="https://www.youtube.com/embed/yeII1NHg2oE?autoplay=1&mute=1&loop=1&playlist=yeII1NHg2oE&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&start=10"
-      allow="autoplay; encrypted-media"
-      title="Beauty Salon Background">
-    </iframe>
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="photos/hero-bg.mp4" type="video/mp4">
+    </video>
   </div>
   <svg class="hero-paisley" viewBox="0 0 800 800" fill="none">
     <path d="M400 60C300 160 220 200 220 340C220 460 310 540 400 620C490 540 580 460 580 340C580 200 500 160 400 60Z" stroke="#d8b378" stroke-width="0.6" opacity="0.5"/>
