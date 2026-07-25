@@ -902,7 +902,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
         </a>
       </div>
     </div>
-    <form class="book-form reveal" id="bookingForm">
+    <form class="book-form reveal" id="bookingForm" action="https://formspree.io/f/mwvgwaqe" method="POST">
       <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name"></div>
       <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number"></div>
       <div class="field"><label>Service</label>
@@ -1262,7 +1262,7 @@ function showSlide(i){
 setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
 
 /* ---------- Booking form ---------- */
-const FORMSPREE_ID = 'YOUR_FORM_ID'; // <- replace with your Formspree form ID
+const FORMSPREE_ID = 'mwvgwaqe';
 document.getElementById('bookingForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const form = e.target;
