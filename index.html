@@ -84,10 +84,8 @@ header.scrolled{
   background:rgba(23,10,15,0.82);
   border-bottom:1px solid var(--line);
 }
-.logo{display:flex;align-items:center;gap:10px;}
-.logo svg{width:34px;height:34px;}
-.logo-text{font-family:var(--serif);font-size:19px;letter-spacing:1.5px;line-height:1.05;}
-.logo-text b{font-weight:600;color:var(--champagne);display:block;font-size:15px;letter-spacing:3px;}
+.logo{display:flex;align-items:center;}
+.logo-img{height:54px;width:54px;object-fit:contain;border-radius:50%;background:#111;}
 nav.links{display:flex;gap:34px;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;}
 nav.links a{position:relative;opacity:.85;transition:opacity .3s;}
 nav.links a:hover{opacity:1;}
@@ -432,9 +430,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
   .quick-link{padding:14px 16px;}
 }
 @media(max-width:400px){
-  .logo-text{font-size:16px;}
-  .logo-text b{font-size:12.5px;letter-spacing:2px;}
-  .logo svg{width:28px;height:28px;}
+  .logo-img{height:42px;width:42px;}
   header{padding:16px 16px;}
   header.scrolled{padding:10px 16px;}
   .hero h1{letter-spacing:0;}
@@ -470,13 +466,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 <!-- ===================== NAV ===================== -->
 <header id="siteHeader">
   <a href="#home" class="logo">
-    <svg viewBox="0 0 48 48" fill="none">
-      <path d="M24 4C20 10 14 12 14 20C14 27 18.5 31 24 34C29.5 31 34 27 34 20C34 12 28 10 24 4Z" stroke="#d8b378" stroke-width="1.2"/>
-      <path d="M24 34V44" stroke="#d8b378" stroke-width="1.2"/>
-      <path d="M17 44H31" stroke="#d8b378" stroke-width="1.2"/>
-      <circle cx="24" cy="19" r="3.4" stroke="#d8b378" stroke-width="1"/>
-    </svg>
-    <span class="logo-text"><b>SAINI MAKEOVER</b>Beauty Salon</span>
+    <img src="photos/logo.jpg" alt="Saini Makeover Logo" class="logo-img">
   </a>
   <nav class="links">
     <a href="#about">About</a>
