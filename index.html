@@ -1272,15 +1272,6 @@ setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
 window.formspree = window.formspree || function(){ (formspree.q = formspree.q || []).push(arguments); };
 formspree('initForm', { formElement: '#bookingForm', formId: 'mwvgwaqe' });
 
-// After Formspree succeeds, also open WhatsApp
-document.getElementById('bookingForm').addEventListener('submit', function(e){
-  const inputs = this.querySelectorAll('input,select,textarea');
-  const [name, phone, service, date, time, message] = inputs;
-  setTimeout(()=>{
-    const text = `Hi Saini Makeover, I'd like to book an appointment.%0AName: ${encodeURIComponent(name.value)}%0APhone: ${encodeURIComponent(phone.value)}%0AService: ${encodeURIComponent(service.value)}%0ADate: ${date.value}%0ATime: ${time.value}%0AMessage: ${encodeURIComponent(message.value)}`;
-    window.open(`https://wa.me/917696304473?text=${text}`, '_blank');
-  }, 800);
-});
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
