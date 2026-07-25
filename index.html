@@ -902,20 +902,24 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
         </a>
       </div>
     </div>
-    <form class="book-form reveal" id="bookingForm" action="https://formspree.io/f/mwvgwaqe" method="POST">
-      <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name"></div>
-      <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number"></div>
+    <div data-fs-success style="display:none;grid-column:1/-1;padding:24px;border:1px solid var(--champagne);color:var(--champagne);font-family:var(--serif);font-size:18px;font-style:italic;text-align:center;border-radius:2px;">
+      ✦ Booking received! We'll confirm via WhatsApp shortly.
+    </div>
+    <div data-fs-error style="display:none;grid-column:1/-1;padding:16px;border:1px solid var(--rosegold);color:var(--rosegold);font-size:13px;border-radius:2px;"></div>
+    <form class="book-form reveal" id="bookingForm">
+      <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name" data-fs-field></div>
+      <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number" data-fs-field></div>
       <div class="field"><label>Service</label>
-        <select name="Service" required>
+        <select name="Service" required data-fs-field>
           <option value="">Select a service</option>
           <option>Hair</option><option>Skin</option><option>Makeup</option>
           <option>Mehndi</option><option>Nails</option><option>Bridal Package</option><option>Festival Package</option>
         </select>
       </div>
-      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date"></div>
-      <div class="field full"><label>Preferred Time</label><input type="time" name="Preferred Time"></div>
-      <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..."></textarea></div>
-      <div class="submit-row"><button type="submit" class="btn-solid"><span>Book Appointment</span></button></div>
+      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" data-fs-field></div>
+      <div class="field full"><label>Preferred Time</label><input type="time" name="Preferred Time" data-fs-field></div>
+      <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..." data-fs-field></textarea></div>
+      <div class="submit-row"><button type="submit" class="btn-solid" data-fs-submit-btn><span>Book Appointment</span></button></div>
     </form>
   </div>
 </section>
@@ -1262,30 +1266,19 @@ function showSlide(i){
 setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
 
 /* ---------- Booking form ---------- */
-const FORMSPREE_ID = 'mwvgwaqe';
-document.getElementById('bookingForm').addEventListener('submit', async e=>{
-  e.preventDefault();
-  const form = e.target;
-  const inputs = form.querySelectorAll('input,select,textarea');
+window.formspree = window.formspree || function(){ (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#bookingForm', formId: 'mwvgwaqe' });
+
+// After Formspree succeeds, also open WhatsApp
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  const inputs = this.querySelectorAll('input,select,textarea');
   const [name, phone, service, date, time, message] = inputs;
-
-  // Email the booking to the salon via Formspree (fire-and-forget)
-  if(FORMSPREE_ID && FORMSPREE_ID !== 'YOUR_FORM_ID'){
-    try{
-      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        headers: {'Accept': 'application/json'},
-        body: new FormData(form)
-      });
-    }catch(err){
-      console.error('Booking email failed to send:', err);
-    }
-  }
-
-  // Also hand off to WhatsApp so the client can message directly
-  const text = `Hi Saini Makeover, I'd like to book an appointment.%0AName: ${encodeURIComponent(name.value)}%0APhone: ${encodeURIComponent(phone.value)}%0AService: ${encodeURIComponent(service.value)}%0ADate: ${date.value}%0ATime: ${time.value}%0AMessage: ${encodeURIComponent(message.value)}`;
-  window.open(`https://wa.me/917696304473?text=${text}`, '_blank');
+  setTimeout(()=>{
+    const text = `Hi Saini Makeover, I'd like to book an appointment.%0AName: ${encodeURIComponent(name.value)}%0APhone: ${encodeURIComponent(phone.value)}%0AService: ${encodeURIComponent(service.value)}%0ADate: ${date.value}%0ATime: ${time.value}%0AMessage: ${encodeURIComponent(message.value)}`;
+    window.open(`https://wa.me/917696304473?text=${text}`, '_blank');
+  }, 800);
 });
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
