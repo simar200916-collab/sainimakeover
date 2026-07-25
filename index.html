@@ -207,6 +207,16 @@ section{position:relative;padding:130px clamp(20px,6vw,80px);}
 .service-item p{font-size:13px;color:rgba(243,232,216,0.55);margin-top:8px;font-weight:300;}
 .service-item .arrow{position:absolute;top:26px;right:24px;font-size:18px;color:var(--champagne);opacity:0;transform:translateX(-6px);transition:all .3s ease;}
 .service-item:hover .arrow{opacity:1;transform:translateX(0);}
+.service-item .price{
+  display:inline-block;margin-top:12px;font-size:13px;letter-spacing:.5px;
+  color:var(--champagne);font-family:var(--serif);font-style:italic;
+}
+/* All-view category label */
+.all-cat-section{margin-bottom:48px;}
+.all-cat-label{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--champagne);
+  padding-bottom:14px;margin-bottom:2px;border-bottom:1px solid var(--line);
+}
 
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin-bottom:70px;}
 .cat-card{background:var(--ink);padding:44px 30px;text-align:left;position:relative;transition:background .4s ease;cursor:pointer;}
@@ -518,7 +528,8 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
   </div>
 
   <div class="service-tabs">
-    <button class="tab-btn active" data-target="hair">Hair</button>
+    <button class="tab-btn active" data-target="all">All</button>
+    <button class="tab-btn" data-target="hair">Hair</button>
     <button class="tab-btn" data-target="skin">Skin</button>
     <button class="tab-btn" data-target="makeup">Makeup</button>
     <button class="tab-btn" data-target="mehndi">Mehndi</button>
@@ -526,72 +537,74 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
     <button class="tab-btn" data-target="spa">Spa &amp; Waxing</button>
   </div>
 
-  <div class="tab-panel active" id="hair">
+  <div class="tab-panel active" id="all"></div>
+
+  <div class="tab-panel" id="hair">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Hair Spa</h4><p>Deep nourishment &amp; scalp therapy</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Hair Cut &amp; Style</h4><p>Precision cutting, tailored to face shape</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Blow Dry</h4><p>Salon-finish volume and shine</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>Smoothening</h4><p>Frizz-free, silky straight finish</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">05</span><h4>Keratin Treatment</h4><p>Long-lasting smoothness &amp; repair</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">06</span><h4>Kerasmooth</h4><p>Gentle keratin-infused straightening</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">07</span><h4>Global Colour</h4><p>Full head colour, custom shade match</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">08</span><h4>Highlights</h4><p>Dimension &amp; face-framing tones</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">09</span><h4>Hair Botox</h4><p>Deep repair without the flat-iron</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">10</span><h4>Protein Treatment</h4><p>Strength &amp; elasticity restored</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Hair Spa</h4><p>Deep nourishment &amp; scalp therapy</p><span class="price">From ₹499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Hair Cut &amp; Style</h4><p>Precision cutting, tailored to face shape</p><span class="price">From ₹299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Blow Dry</h4><p>Salon-finish volume and shine</p><span class="price">From ₹249</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Smoothening</h4><p>Frizz-free, silky straight finish</p><span class="price">From ₹2,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Keratin Treatment</h4><p>Long-lasting smoothness &amp; repair</p><span class="price">From ₹3,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Kerasmooth</h4><p>Gentle keratin-infused straightening</p><span class="price">From ₹2,799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">07</span><h4>Global Colour</h4><p>Full head colour, custom shade match</p><span class="price">From ₹1,799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">08</span><h4>Highlights</h4><p>Dimension &amp; face-framing tones</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">09</span><h4>Hair Botox</h4><p>Deep repair without the flat-iron</p><span class="price">From ₹3,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">10</span><h4>Protein Treatment</h4><p>Strength &amp; elasticity restored</p><span class="price">From ₹999</span><span class="arrow">→</span></div>
     </div>
   </div>
 
   <div class="tab-panel" id="skin">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Cleanup</h4><p>Fresh, deep-pore reset</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Bleach</h4><p>Even-toned, brightened skin</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Fruit Facial</h4><p>Gentle, vitamin-rich glow</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>Vitamin C Facial</h4><p>Brightening &amp; even tone</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">05</span><h4>Gold Facial</h4><p>24K radiance ritual</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">06</span><h4>Skin Whitening Facial</h4><p>Deep brightening therapy</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">07</span><h4>Hydra Facial</h4><p>Deep hydration, instant glow</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">08</span><h4>D-Tan</h4><p>Sun damage reversed, tone restored</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Cleanup</h4><p>Fresh, deep-pore reset</p><span class="price">From ₹399</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Bleach</h4><p>Even-toned, brightened skin</p><span class="price">From ₹299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Fruit Facial</h4><p>Gentle, vitamin-rich glow</p><span class="price">From ₹599</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Vitamin C Facial</h4><p>Brightening &amp; even tone</p><span class="price">From ₹799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Gold Facial</h4><p>24K radiance ritual</p><span class="price">From ₹999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Skin Whitening Facial</h4><p>Deep brightening therapy</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">07</span><h4>Hydra Facial</h4><p>Deep hydration, instant glow</p><span class="price">From ₹1,799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">08</span><h4>D-Tan</h4><p>Sun damage reversed, tone restored</p><span class="price">From ₹499</span><span class="arrow">→</span></div>
     </div>
   </div>
 
   <div class="tab-panel" id="makeup">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Bridal Makeup</h4><p>Full day-of artistry &amp; draping</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Engagement Makeup</h4><p>Soft glam for the ring ceremony</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Party Makeup</h4><p>Bold, photo-ready looks</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>HD Makeup</h4><p>Flawless finish, camera-perfect</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">05</span><h4>Airbrush Makeup</h4><p>Featherlight, 12-hour wear</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">06</span><h4>Reception Makeup</h4><p>Statement glam for the big evening</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Bridal Makeup</h4><p>Full day-of artistry &amp; draping</p><span class="price">On Consultation</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Engagement Makeup</h4><p>Soft glam for the ring ceremony</p><span class="price">From ₹3,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Party Makeup</h4><p>Bold, photo-ready looks</p><span class="price">From ₹1,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>HD Makeup</h4><p>Flawless finish, camera-perfect</p><span class="price">From ₹2,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Airbrush Makeup</h4><p>Featherlight, 12-hour wear</p><span class="price">From ₹3,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Reception Makeup</h4><p>Statement glam for the big evening</p><span class="price">From ₹2,999</span><span class="arrow">→</span></div>
     </div>
   </div>
 
   <div class="tab-panel" id="mehndi">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Bridal Mehndi</h4><p>Intricate full hand &amp; feet artistry</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Engagement Mehndi</h4><p>Elegant mid-detail patterns</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Party Mehndi</h4><p>Quick, festive designs</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>Full Hand Mehndi</h4><p>Wrist to fingertip coverage</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">05</span><h4>Bangle Mehndi</h4><p>Delicate wrist &amp; band motifs</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">06</span><h4>Simple Mehndi</h4><p>Clean, minimal everyday designs</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Bridal Mehndi</h4><p>Intricate full hand &amp; feet artistry</p><span class="price">From ₹2,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Engagement Mehndi</h4><p>Elegant mid-detail patterns</p><span class="price">From ₹1,499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Party Mehndi</h4><p>Quick, festive designs</p><span class="price">From ₹499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Full Hand Mehndi</h4><p>Wrist to fingertip coverage</p><span class="price">From ₹799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Bangle Mehndi</h4><p>Delicate wrist &amp; band motifs</p><span class="price">From ₹399</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Simple Mehndi</h4><p>Clean, minimal everyday designs</p><span class="price">From ₹299</span><span class="arrow">→</span></div>
     </div>
   </div>
 
   <div class="tab-panel" id="nails">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Gel Extension</h4><p>Durable, glass-like finish</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Acrylic Extension</h4><p>Strong, sculpted shape</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Temporary Nails</h4><p>Press-on elegance, event-ready</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>French Nails</h4><p>Timeless tip-classic finish</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">05</span><h4>Chrome Nails</h4><p>Mirror-metallic statement</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Gel Extension</h4><p>Durable, glass-like finish</p><span class="price">From ₹999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Acrylic Extension</h4><p>Strong, sculpted shape</p><span class="price">From ₹1,299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Temporary Nails</h4><p>Press-on elegance, event-ready</p><span class="price">From ₹499</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>French Nails</h4><p>Timeless tip-classic finish</p><span class="price">From ₹799</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Chrome Nails</h4><p>Mirror-metallic statement</p><span class="price">From ₹899</span><span class="arrow">→</span></div>
     </div>
   </div>
 
   <div class="tab-panel" id="spa">
     <div class="service-list">
-      <div class="service-item"><span class="num">01</span><h4>Waxing</h4><p>Full body, smooth &amp; gentle</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">02</span><h4>Threading</h4><p>Precision brow &amp; face shaping</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">03</span><h4>Body Spa</h4><p>Full relaxation &amp; rejuvenation</p><span class="arrow">→</span></div>
-      <div class="service-item"><span class="num">04</span><h4>Hair Treatments</h4><p>Restorative scalp &amp; strand care</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">01</span><h4>Waxing</h4><p>Full body, smooth &amp; gentle</p><span class="price">From ₹299</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Threading</h4><p>Precision brow &amp; face shaping</p><span class="price">From ₹50</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Body Spa</h4><p>Full relaxation &amp; rejuvenation</p><span class="price">From ₹1,999</span><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Hair Treatments</h4><p>Restorative scalp &amp; strand care</p><span class="price">From ₹799</span><span class="arrow">→</span></div>
     </div>
   </div>
 </section>
@@ -875,6 +888,28 @@ gsap.utils.toArray('.counter b').forEach(el => {
 });
 
 /* ---------- Service tabs ---------- */
+function buildAllPanel(){
+  const allPanel = document.getElementById('all');
+  if(allPanel.children.length > 0) return;
+  const cats = [
+    {id:'hair',   label:'Hair'},
+    {id:'skin',   label:'Skin'},
+    {id:'makeup', label:'Makeup'},
+    {id:'mehndi', label:'Mehndi'},
+    {id:'nails',  label:'Nails'},
+    {id:'spa',    label:'Spa &amp; Waxing'},
+  ];
+  cats.forEach(cat=>{
+    const src = document.getElementById(cat.id);
+    const sec = document.createElement('div');
+    sec.className = 'all-cat-section';
+    sec.innerHTML = `<div class="all-cat-label">${cat.label}</div>`;
+    sec.appendChild(src.querySelector('.service-list').cloneNode(true));
+    allPanel.appendChild(sec);
+  });
+}
+buildAllPanel();
+
 document.querySelectorAll('.tab-btn[data-target]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.tab-btn[data-target]').forEach(b=>b.classList.remove('active'));
@@ -887,7 +922,7 @@ document.querySelectorAll('.cat-card').forEach(card=>{
   card.addEventListener('click', ()=>{
     const target = card.dataset.tab;
     document.querySelector(`.tab-btn[data-target="${target}"]`).click();
-    document.getElementById(target).scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('services').scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
 
