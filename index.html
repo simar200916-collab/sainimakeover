@@ -261,8 +261,8 @@ section{position:relative;padding:130px clamp(20px,6vw,80px);}
 .ba-wrap{max-width:760px;margin:0 auto;}
 .ba-slider{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);user-select:none;}
 .ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
-.ba-before{background:url('photos/hair-ba2.jpg') left center/200% auto no-repeat;}
-.ba-after{background:url('photos/hair-ba2.jpg') right center/200% auto no-repeat;}
+.ba-before{background:url('photos/hair-ba.jpg') center/cover no-repeat;}
+.ba-after{background:url('photos/hair-ba2.jpg') center/cover no-repeat;}
 .ba-after{clip-path:inset(0 0 0 50%);}
 .ba-label{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--champagne);}
 .ba-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(243,232,216,0.5);}
@@ -600,9 +600,10 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
   <div class="hero-video-bg">
-    <video autoplay muted loop playsinline preload="auto">
+    <video autoplay muted loop playsinline preload="auto" poster="photos/about-salon.jpg">
       <source src="photos/hero-bg.mp4" type="video/mp4">
     </video>
+    <img src="photos/about-salon.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0.55;" onerror="this.style.display='none'">
   </div>
   <svg class="hero-paisley" viewBox="0 0 800 800" fill="none">
     <path d="M400 60C300 160 220 200 220 340C220 460 310 540 400 620C490 540 580 460 580 340C580 200 500 160 400 60Z" stroke="#d8b378" stroke-width="0.6" opacity="0.5"/>
@@ -938,7 +939,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       </div>
       <div class="contact-card">
          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
-        <span><b>Phone</b><span>7696304473</span></span>
+        <span><b>Phone</b><a href="tel:+917696304473" style="color:inherit;">7696304473</a></span>
       </div>
       <div class="contact-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
@@ -946,7 +947,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       </div>
       <div class="contact-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        <span><b>Follow / Message</b><span>Instagram · WhatsApp</span></span>
+        <span><b>Follow / Message</b><span><a href="https://www.instagram.com/saini_makeover_beauty_salon769" target="_blank" rel="noopener" style="color:inherit;">Instagram</a> · <a href="https://wa.me/917696304473" target="_blank" rel="noopener" style="color:inherit;">WhatsApp</a></span></span>
       </div>
       <div style="border:1px solid var(--line);overflow:hidden;border-radius:2px;margin-top:4px;">
         <img src="photos/salon-exterior.jpg" alt="Saini Makeover Beauty Salon — Exterior" style="width:100%;height:220px;object-fit:cover;display:block;">
@@ -982,7 +983,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       <h5>Contact</h5>
       <ul>
         <li>Saini Makeover Beauty Salon, near Sansoya Sweet Shop, Panjaur</li>
-        <li>7696304473</li>
+        <li><a href="tel:+917696304473" style="color:inherit;">7696304473</a></li>
         <li>Mon – Sun, 10 AM – 10 PM</li>
       </ul>
     </div>
@@ -1169,6 +1170,8 @@ const galleryData = [
   {cat:'makeup', img:'photos/makeup-purple.jpg',   label:'Bridal Purple Look',    r:'3/4'},
   {cat:'makeup', img:'photos/makeup-bridal-red.jpg', label:'Red Lehenga Bridal',  r:'3/4'},
   {cat:'hair',   img:'photos/hair-rose-braid.jpg', label:'Rose Braid',            r:'4/5'},
+  {cat:'makeup', img:'photos/about-salon.jpg',    label:'Our Studio',            r:'4/3'},
+  {cat:'makeup', img:'photos/salon-exterior.jpg', label:'Saini Makeover — Panjaur', r:'4/3'},
 ];
 const icons = {
   hair:'<path d="M6 3c4 0 4 4 6 4s2-4 6-4c-1 6 1 8-1 12-1 2-3 2-4 6-1-4-3-4-4-6-2-4 0-6-1-2 0 0-3-4-2-10Z"/>',
