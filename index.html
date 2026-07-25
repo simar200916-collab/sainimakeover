@@ -396,8 +396,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
 }
 .fab:hover{transform:scale(1.08);}
 .fab.whatsapp{background:#25D366;color:#fff;}
-.fab.call{background:linear-gradient(135deg,var(--champagne),var(--rosegold));color:var(--ink);}
-.fab svg{width:22px;height:22px;}
+.fab.call{
+  background:radial-gradient(circle at 32% 25%,#f4d5b1 0%,var(--champagne) 52%,var(--rosegold) 100%);
+  color:var(--ink);
+  border:1px solid rgba(243,232,216,0.62);
+}
+.fab svg{width:22px;height:22px;display:block;}
+.fab.call svg{width:21px;height:21px;stroke-width:1.9;}
 .fab.top{background:rgba(23,10,15,0.9);border:1px solid var(--line);color:var(--champagne);opacity:0;pointer-events:none;transition:opacity .3s;}
 .fab.top.show{opacity:1;pointer-events:auto;}
 
@@ -445,6 +450,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
     gap:9px;
   }
   .fab{width:46px;height:46px;}
+  .fab.call svg{width:19px;height:19px;}
   .book-quick{gap:10px;}
   .quick-link{padding:14px 16px;}
 }
