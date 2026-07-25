@@ -227,18 +227,20 @@ section{position:relative;padding:130px clamp(20px,6vw,80px);}
 
 /* ---------- Packages ---------- */
 .packages{background:linear-gradient(180deg,var(--burgundy-deep),var(--ink));}
-.pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+.pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:stretch;}
 .pack-card{
   border:1px solid var(--line);padding:48px 40px;position:relative;background:rgba(216,179,120,0.02);
+  display:flex;flex-direction:column;
 }
 .pack-card.featured{border-color:var(--champagne);background:linear-gradient(160deg,rgba(216,179,120,0.09),rgba(58,13,31,0.3));}
 .pack-badge{position:absolute;top:0;right:40px;transform:translateY(-50%);background:var(--champagne);color:var(--ink);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;font-weight:500;}
+.pack-badge.alt{background:var(--rosegold);}
 .pack-card h3{font-family:var(--serif);font-size:32px;font-weight:500;}
 .pack-card .tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--champagne);margin-top:8px;display:block;}
-.pack-list{margin:30px 0;}
+.pack-list{margin:30px 0;flex:1;}
 .pack-list li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:300;color:rgba(243,232,216,0.78);}
 .pack-list li b{color:var(--cream);font-weight:400;}
-.pack-note{font-size:15.5px;color:rgba(243,232,216,0.65);margin:20px 0 26px;font-style:italic;font-family:var(--serif);line-height:1.6;}
+.pack-note{font-size:15.5px;color:rgba(243,232,216,0.65);margin:0 0 26px;font-style:italic;font-family:var(--serif);line-height:1.6;}
 
 /* ---------- Before / After ---------- */
 .ba-wrap{max-width:760px;margin:0 auto;}
@@ -262,23 +264,56 @@ input.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor
 /* ---------- Gallery ---------- */
 .gallery{background:var(--ink);}
 .gal-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
-.gal-grid{columns:4 260px;column-gap:16px;}
-@media(max-width:1100px){.gal-grid{columns:3 220px;}}
-@media(max-width:700px){.gal-grid{columns:2 160px;}}
-.gal-item{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
-.gal-item .ph{
-  width:100%;position:relative;overflow:hidden;
-  aspect-ratio:var(--r,3/4);
+.gal-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
 }
-.gal-item .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
-.gal-item:hover .ph img{transform:scale(1.06);}
+@media(max-width:1100px){.gal-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:680px){.gal-grid{grid-template-columns:repeat(2,1fr);}}
+.gal-item{
+  position:relative;overflow:hidden;
+  border:1px solid var(--line);cursor:pointer;
+  aspect-ratio:1/1;
+}
+.gal-item .ph{width:100%;height:100%;position:relative;overflow:hidden;}
+.gal-item .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease;}
+.gal-item:hover .ph img{transform:scale(1.08);}
 .gal-item .ph span{
-  position:absolute;bottom:0;left:0;right:0;padding:18px 14px 14px;
-  background:linear-gradient(to top,rgba(23,10,15,0.82),transparent);
-  font-family:var(--serif);font-style:italic;font-size:14px;color:var(--cream);
-  opacity:0;transition:opacity .3s ease;
+  position:absolute;bottom:0;left:0;right:0;
+  padding:36px 14px 14px;
+  background:linear-gradient(to top,rgba(23,10,15,0.88) 0%,transparent 100%);
+  font-family:var(--serif);font-style:italic;font-size:13.5px;
+  color:var(--cream);letter-spacing:.3px;
+  transform:translateY(6px);opacity:.75;
+  transition:opacity .3s ease,transform .3s ease;
 }
-.gal-item:hover .ph span{opacity:1;}
+.gal-item:hover .ph span{opacity:1;transform:translateY(0);}
+
+/* ---------- Lightbox ---------- */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:9000;
+  background:rgba(23,10,15,0.94);
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+#lightbox.open{display:flex;}
+#lightbox img{
+  max-width:min(90vw,860px);max-height:90vh;
+  object-fit:contain;border:1px solid var(--line);
+}
+#lightbox .lb-close{
+  position:fixed;top:24px;right:30px;font-size:28px;
+  color:var(--champagne);cursor:pointer;line-height:1;
+  opacity:.8;transition:opacity .2s;background:none;border:none;
+}
+#lightbox .lb-close:hover{opacity:1;}
+#lightbox .lb-caption{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-style:italic;font-size:16px;
+  color:rgba(243,232,216,0.75);letter-spacing:.5px;
+  white-space:nowrap;
+}
 
 /* ---------- Testimonials ---------- */
 .testimonials{background:linear-gradient(180deg,var(--ink),var(--burgundy-deep),var(--ink));text-align:center;}
@@ -633,6 +668,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
       <a href="#booking" class="btn-solid"><span>Enquire for Bridal</span></a>
     </div>
     <div class="pack-card">
+      <span class="pack-badge alt">Best Value</span>
       <h3>Festival Package</h3>
       <span class="tag">Celebration Ready</span>
       <ul class="pack-list">
@@ -641,14 +677,22 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
         <li>Threading &amp; Cleanup <b>Included</b></li>
         <li>Simple / Bangle Mehndi <b>Included</b></li>
         <li>French or Temporary Nails <b>Add-on</b></li>
+        <li>Nail Polish Finish <b>Included</b></li>
       </ul>
       <p class="pack-note">Ideal for Karva Chauth, Lohri, Diwali &amp; family functions.</p>
-      <a href="#booking" class="btn-ghost">Enquire for Festival</a>
+      <a href="#booking" class="btn-solid"><span>Enquire for Festival</span></a>
     </div>
   </div>
 </section>
 
 <!-- ===================== BEFORE / AFTER + GALLERY ===================== -->
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <img id="lbImg" src="" alt="">
+  <span class="lb-caption" id="lbCaption"></span>
+</div>
+
 <section id="gallery" class="gallery">
   <div class="section-head reveal">
     <p class="eyebrow">The Portfolio</p>
@@ -1000,10 +1044,31 @@ function renderGallery(filter){
   galleryData.filter(g => filter==='all' || g.cat===filter).forEach(g=>{
     const div = document.createElement('div');
     div.className = 'gal-item';
-    div.innerHTML = `<div class="ph" style="--r:${g.r}"><img src="${g.img}" alt="${g.label}" loading="lazy"><span>${g.label}</span></div>`;
+    div.innerHTML = `<div class="ph"><img src="${g.img}" alt="${g.label}" loading="lazy"><span>${g.label}</span></div>`;
+    div.addEventListener('click', ()=> openLightbox(g.img, g.label));
     galGrid.appendChild(div);
   });
 }
+
+/* ---------- Lightbox ---------- */
+const lbEl    = document.getElementById('lightbox');
+const lbImg   = document.getElementById('lbImg');
+const lbCap   = document.getElementById('lbCaption');
+const lbClose = document.getElementById('lbClose');
+function openLightbox(src, caption){
+  lbImg.src = src;
+  lbCap.textContent = caption;
+  lbEl.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lbEl.classList.remove('open');
+  document.body.style.overflow = '';
+  lbImg.src = '';
+}
+lbClose.addEventListener('click', closeLightbox);
+lbEl.addEventListener('click', e=>{ if(e.target === lbEl) closeLightbox(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
 renderGallery('all');
 document.querySelectorAll('.tab-btn[data-gal]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
