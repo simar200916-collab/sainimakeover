@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#170a0f" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>Saini Makeover Beauty Salon — Where Beauty Meets Tradition</title>
+<meta name="description" content="Saini Makeover Beauty Salon, Panjaur — luxury hair, skin, makeup, mehndi and nail artistry by Navpreet Kaur." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+:root{
+  --ink:#170a0f;
+  --burgundy:#3a0d1f;
+  --burgundy-deep:#2a0716;
+  --champagne:#d8b378;
+  --rosegold:#c1867d;
+  --cream:#f3e8d8;
+  --blush:#f1dcd8;
+  --line: rgba(216,179,120,0.28);
+  --serif: 'Cormorant Garamond', serif;
+  --display: 'Playfair Display', serif;
+  --sans: 'Poppins', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html{overflow-x:hidden;}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+button,a{touch-action:manipulation;}
+::selection{background:var(--champagne);color:var(--ink);}
+a{color:inherit;text-decoration:none;}
+a:visited{color:inherit;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--champagne),var(--rosegold));border-radius:10px;}
+
+/* ---------- Loading screen ---------- */
+#loader{
+  position:fixed;inset:0;z-index:9999;background:var(--ink);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;
+}
+#loader .mark{font-family:var(--display);font-style:italic;font-size:clamp(28px,6vw,44px);letter-spacing:2px;color:var(--champagne);opacity:0;}
+#loader .bar{width:180px;height:1px;background:rgba(216,179,120,0.25);position:relative;overflow:hidden;}
+#loader .bar span{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--rosegold),var(--champagne));}
+
+/* cursor glow */
+#glow{
+  position:fixed;width:280px;height:280px;border-radius:50%;pointer-events:none;z-index:3;
+  background:radial-gradient(circle,rgba(216,179,120,0.10),transparent 70%);
+  transform:translate(-50%,-50%);transition:opacity .3s ease;
+  display:none;
+}
+@media(hover:hover) and (pointer:fine){#glow{display:block;}}
+
+/* ---------- Nav ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px clamp(20px,5vw,64px);
+  background:linear-gradient(to bottom, rgba(23,10,15,0.85), transparent);
+  backdrop-filter:blur(6px);
+  transition:padding .4s ease, background .4s ease;
+}
+header.scrolled{
+  padding:12px clamp(20px,5vw,64px);
+  background:rgba(23,10,15,0.82);
+  border-bottom:1px solid var(--line);
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo svg{width:34px;height:34px;}
+.logo-text{font-family:var(--serif);font-size:19px;letter-spacing:1.5px;line-height:1.05;}
+.logo-text b{font-weight:600;color:var(--champagne);display:block;font-size:15px;letter-spacing:3px;}
+nav.links{display:flex;gap:34px;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;}
+nav.links a{position:relative;opacity:.85;transition:opacity .3s;}
+nav.links a:hover{opacity:1;}
+nav.links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--champagne);transition:width .35s ease;}
+nav.links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:16px;}
+.btn-ghost,.btn-ghost:link,.btn-ghost:visited{
+  display:inline-block;
+  border:1px solid var(--champagne);color:var(--champagne);
+  padding:10px 22px;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
+  border-radius:2px;transition:all .35s ease;
+}
+.btn-ghost:hover,.btn-ghost:focus,.btn-ghost:active{background:var(--champagne);color:var(--ink);}
+.burger{display:none;flex-direction:column;gap:5px;z-index:110;padding:14px;margin:-14px;}
+.burger span{width:24px;height:1px;background:var(--cream);}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:120px 20px 60px;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(193,134,125,0.16), transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(216,179,120,0.14), transparent 55%),
+    linear-gradient(180deg, var(--ink) 0%, var(--burgundy-deep) 55%, var(--ink) 100%);
+  z-index:-2;
+}
+.hero-paisley{
+  position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:.35;
+}
+.eyebrow{
+  font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--champagne);
+  margin-bottom:26px;opacity:0;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:400;font-size:clamp(46px,9vw,116px);line-height:1.02;letter-spacing:.5px;
+}
+.hero h1 .line{display:block;overflow:hidden;}
+.hero h1 .line span{display:inline-block;transform:translateY(110%);}
+.hero h1 em{
+  font-style:italic;font-family:var(--display);
+  background:linear-gradient(100deg,var(--champagne),var(--blush) 45%,var(--rosegold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.sub{
+  margin-top:28px;max-width:520px;font-size:16px;line-height:1.9;color:rgba(243,232,216,0.75);font-weight:300;opacity:0;
+}
+.hero-actions{display:flex;gap:18px;margin-top:44px;flex-wrap:wrap;justify-content:center;opacity:0;}
+.btn-solid,.btn-solid:link,.btn-solid:visited,.btn-solid:active{
+  display:inline-block;
+  background:linear-gradient(120deg,var(--champagne),var(--rosegold));
+  color:var(--ink);padding:16px 34px;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;
+  font-weight:500;border-radius:2px;position:relative;overflow:hidden;
+}
+.btn-solid span{position:relative;z-index:1;}
+.btn-solid:hover,.btn-solid:focus{letter-spacing:2.6px;color:var(--ink);}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,232,216,0.55);
+}
+.scroll-cue .line-el{width:1px;height:46px;background:linear-gradient(var(--champagne),transparent);position:relative;overflow:hidden;}
+.scroll-cue .line-el i{position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--champagne);animation:dropline 2.2s ease-in-out infinite;}
+@keyframes dropline{0%{top:-100%;}60%{top:100%;}100%{top:100%;}}
+
+/* ---------- section shells ---------- */
+section{position:relative;padding:130px clamp(20px,6vw,80px);}
+.section-head{max-width:720px;margin-bottom:70px;}
+.section-head .eyebrow{margin-bottom:16px;opacity:1;}
+.section-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.5vw,64px);line-height:1.08;}
+.section-head h2 em{font-style:italic;color:var(--champagne);}
+.section-head p{margin-top:20px;font-size:15.5px;line-height:1.85;color:rgba(243,232,216,0.68);font-weight:300;max-width:560px;}
+.divider{width:64px;height:1px;background:var(--champagne);margin:20px 0;}
+
+/* reveal helper */
+.reveal{opacity:0;transform:translateY(38px);}
+
+/* ---------- About ---------- */
+.about{background:linear-gradient(180deg,var(--ink),var(--burgundy-deep));}
+.about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center;}
+.about-visual{position:relative;aspect-ratio:4/5;border-radius:2px;overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(216,179,120,0.35), transparent 55%),
+    radial-gradient(circle at 75% 80%, rgba(193,134,125,0.4), transparent 55%),
+    linear-gradient(160deg,#2a0716,#150a0f);
+  border:1px solid var(--line);
+}
+.about-visual .frame-label{
+  position:absolute;bottom:22px;left:22px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--champagne);
+}
+.about-visual svg{position:absolute;inset:0;width:100%;height:100%;opacity:.5;}
+.about-copy p{font-size:16px;line-height:1.95;color:rgba(243,232,216,0.72);font-weight:300;margin-bottom:18px;}
+.about-copy .owner{margin-top:26px;font-family:var(--serif);font-size:22px;color:var(--champagne);font-style:italic;}
+.about-copy .owner span{display:block;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(243,232,216,0.55);margin-top:4px;}
+.counters{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px;padding-top:50px;border-top:1px solid var(--line);}
+.counter b{display:block;font-family:var(--serif);font-size:clamp(30px,4vw,46px);color:var(--champagne);font-weight:500;}
+.counter span{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(243,232,216,0.6);}
+
+/* ---------- Services ---------- */
+.services{background:var(--ink);}
+.service-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:56px;}
+.tab-btn{
+  padding:11px 22px;border:1px solid var(--line);border-radius:30px;font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;
+  color:rgba(243,232,216,0.7);transition:all .3s ease;
+}
+.tab-btn.active,.tab-btn:hover{border-color:var(--champagne);color:var(--champagne);background:rgba(216,179,120,0.08);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.service-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+.service-item{
+  background:var(--ink);padding:30px 26px;position:relative;overflow:hidden;transition:background .35s ease;
+}
+.service-item:hover{background:rgba(216,179,120,0.05);}
+.service-item .num{font-family:var(--serif);font-size:13px;color:rgba(216,179,120,0.5);}
+.service-item h4{font-family:var(--serif);font-weight:500;font-size:22px;margin-top:12px;}
+.service-item p{font-size:13px;color:rgba(243,232,216,0.55);margin-top:8px;font-weight:300;}
+.service-item .arrow{position:absolute;top:26px;right:24px;font-size:18px;color:var(--champagne);opacity:0;transform:translateX(-6px);transition:all .3s ease;}
+.service-item:hover .arrow{opacity:1;transform:translateX(0);}
+
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin-bottom:70px;}
+.cat-card{background:var(--ink);padding:44px 30px;text-align:left;position:relative;transition:background .4s ease;cursor:pointer;}
+.cat-card:hover{background:rgba(216,179,120,0.06);}
+.cat-card .icon{width:34px;height:34px;color:var(--champagne);margin-bottom:22px;}
+.cat-card h3{font-family:var(--serif);font-weight:500;font-size:26px;}
+.cat-card p{font-size:12.5px;color:rgba(243,232,216,0.5);margin-top:8px;letter-spacing:.5px;}
+
+/* ---------- Packages ---------- */
+.packages{background:linear-gradient(180deg,var(--burgundy-deep),var(--ink));}
+.pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+.pack-card{
+  border:1px solid var(--line);padding:48px 40px;position:relative;background:rgba(216,179,120,0.02);
+}
+.pack-card.featured{border-color:var(--champagne);background:linear-gradient(160deg,rgba(216,179,120,0.09),rgba(58,13,31,0.3));}
+.pack-badge{position:absolute;top:0;right:40px;transform:translateY(-50%);background:var(--champagne);color:var(--ink);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;font-weight:500;}
+.pack-card h3{font-family:var(--serif);font-size:32px;font-weight:500;}
+.pack-card .tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--champagne);margin-top:8px;display:block;}
+.pack-list{margin:30px 0;}
+.pack-list li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:300;color:rgba(243,232,216,0.78);}
+.pack-list li b{color:var(--cream);font-weight:400;}
+.pack-note{font-size:15.5px;color:rgba(243,232,216,0.65);margin:20px 0 26px;font-style:italic;font-family:var(--serif);line-height:1.6;}
+
+/* ---------- Before / After ---------- */
+.ba-wrap{max-width:760px;margin:0 auto;}
+.ba-slider{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);user-select:none;}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+.ba-before{background:linear-gradient(135deg,#241019,#170a0f);}
+.ba-after{background:linear-gradient(135deg,#3a2410,#170a0f 70%);}
+.ba-after{clip-path:inset(0 0 0 50%);}
+.ba-label{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--champagne);}
+.ba-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(243,232,216,0.5);}
+.ba-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--champagne);cursor:ew-resize;
+}
+.ba-handle::after{
+  content:'⇔';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;background:var(--champagne);color:var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+input.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;}
+
+/* ---------- Gallery ---------- */
+.gallery{background:var(--ink);}
+.gal-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+.gal-grid{columns:4 260px;column-gap:16px;}
+@media(max-width:1100px){.gal-grid{columns:3 220px;}}
+@media(max-width:700px){.gal-grid{columns:2 160px;}}
+.gal-item{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;border:1px solid var(--line);cursor:pointer;}
+.gal-item .ph{
+  width:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:20px;
+  aspect-ratio:var(--r,3/4);
+}
+.gal-item .ph svg{width:30px;height:30px;color:var(--champagne);opacity:.8;}
+.gal-item .ph span{font-family:var(--serif);font-style:italic;font-size:14px;color:rgba(243,232,216,0.7);text-align:center;}
+.gal-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,0.5));opacity:0;transition:opacity .3s;}
+.gal-item:hover::after{opacity:1;}
+
+/* ---------- Testimonials ---------- */
+.testimonials{background:linear-gradient(180deg,var(--ink),var(--burgundy-deep),var(--ink));text-align:center;}
+.t-track-wrap{max-width:720px;margin:0 auto;position:relative;min-height:260px;}
+.t-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;display:flex;flex-direction:column;align-items:center;}
+.t-slide.active{opacity:1;position:relative;}
+.stars{color:var(--champagne);letter-spacing:4px;font-size:16px;margin-bottom:24px;}
+.t-slide p{font-family:var(--serif);font-size:clamp(20px,3vw,28px);line-height:1.6;font-weight:400;font-style:italic;color:var(--cream);max-width:640px;}
+.t-slide .who{margin-top:26px;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--champagne);}
+.t-dots{display:flex;gap:10px;justify-content:center;margin-top:40px;}
+.t-dots button{width:7px;height:7px;border-radius:50%;background:rgba(216,179,120,0.3);transition:all .3s;}
+.t-dots button.active{background:var(--champagne);width:22px;border-radius:4px;}
+
+/* ---------- Booking ---------- */
+.booking{background:var(--ink);}
+.book-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;}
+.book-info h3{font-family:var(--serif);font-size:30px;font-weight:500;margin-bottom:18px;}
+.book-info p{font-size:15px;color:rgba(243,232,216,0.65);line-height:1.9;font-weight:300;margin-bottom:34px;}
+.book-quick{display:flex;flex-direction:column;gap:14px;}
+.quick-link{display:flex;align-items:center;gap:14px;border:1px solid var(--line);padding:16px 20px;transition:all .3s;}
+.quick-link:hover{border-color:var(--champagne);background:rgba(216,179,120,0.05);}
+.quick-link svg{width:20px;height:20px;color:var(--champagne);flex-shrink:0;}
+.quick-link b{font-size:14px;display:block;}
+.quick-link span{font-size:12px;color:rgba(243,232,216,0.55);}
+form.book-form{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+form.book-form .full{grid-column:1/-1;}
+.field label{display:block;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(243,232,216,0.55);margin-bottom:10px;}
+.field input,.field select,.field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);padding:10px 2px;
+  color:var(--cream);font-family:var(--sans);font-size:14.5px;font-weight:300;
+}
+.field select option{background:var(--ink);color:var(--cream);}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--champagne);}
+.field textarea{resize:vertical;min-height:70px;}
+.book-form .submit-row{grid-column:1/-1;margin-top:12px;}
+
+/* ---------- Contact ---------- */
+.contact{background:linear-gradient(180deg,var(--burgundy-deep),var(--ink));}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+.contact-card{border:1px solid var(--line);padding:18px 22px;display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+.contact-card svg{width:20px;height:20px;color:var(--champagne);flex-shrink:0;margin-top:2px;}
+.contact-card b{display:block;font-size:14px;margin-bottom:4px;}
+.contact-card span{font-size:13.5px;color:rgba(243,232,216,0.6);line-height:1.6;}
+.map-box{border:1px solid var(--line);aspect-ratio:1/1;position:relative;overflow:hidden;}
+.map-box iframe{width:100%;height:100%;border:0;filter:grayscale(0.4) sepia(0.15) contrast(1.05);}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp(20px,6vw,80px) 30px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr 1fr;gap:50px;margin-bottom:60px;}
+.foot-logo{font-family:var(--serif);font-size:26px;color:var(--champagne);font-style:italic;margin-bottom:16px;}
+.foot-grid p{font-size:13.5px;color:rgba(243,232,216,0.55);line-height:1.8;font-weight:300;max-width:280px;}
+.foot-grid h5{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--champagne);margin-bottom:18px;}
+.foot-grid ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.foot-grid ul a{font-size:13.5px;color:rgba(243,232,216,0.62);transition:color .3s;}
+.foot-grid ul a:hover{color:var(--champagne);}
+.newsletter{display:flex;border-bottom:1px solid var(--line);padding-bottom:10px;margin-top:10px;}
+.newsletter input{flex:1;background:none;border:none;color:var(--cream);font-size:13px;padding:6px 0;}
+.newsletter input:focus{outline:none;}
+.newsletter button{color:var(--champagne);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;border-top:1px solid var(--line);font-size:12px;color:rgba(243,232,216,0.45);}
+.foot-social{display:flex;gap:16px;}
+.foot-social a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.foot-social a:hover{border-color:var(--champagne);color:var(--champagne);}
+.foot-social svg{width:15px;height:15px;}
+
+/* ---------- Floating buttons ---------- */
+.floaters{position:fixed;right:24px;bottom:24px;display:flex;flex-direction:column;gap:12px;z-index:90;}
+.fab{
+  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);transition:transform .3s ease;
+}
+.fab:hover{transform:scale(1.08);}
+.fab.whatsapp{background:#25D366;color:#fff;}
+.fab.call{background:linear-gradient(135deg,var(--champagne),var(--rosegold));color:var(--ink);}
+.fab svg{width:22px;height:22px;}
+.fab.top{background:rgba(23,10,15,0.9);border:1px solid var(--line);color:var(--champagne);opacity:0;pointer-events:none;transition:opacity .3s;}
+.fab.top.show{opacity:1;pointer-events:auto;}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  nav.links,.nav-cta .btn-ghost{display:none;}
+  .burger{display:flex;}
+  .about-grid,.book-grid,.contact-grid{grid-template-columns:1fr;gap:44px;}
+  .counters{grid-template-columns:repeat(2,1fr);}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .pack-grid{grid-template-columns:1fr;}
+  form.book-form{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  section{padding:90px 22px;}
+
+  /* prevent iOS Safari auto-zoom on focus (needs 16px+) */
+  .field input,.field select,.field textarea,.newsletter input{font-size:16px;}
+}
+@media(max-width:560px){
+  .cat-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr;}
+  section{padding:72px 18px;}
+  .section-head{margin-bottom:48px;}
+
+  /* cards keep desktop padding by default — tighten for phones */
+  .pack-card{padding:36px 24px;}
+  .pack-card .btn-solid,.pack-card .btn-ghost{
+    display:block;width:100%;text-align:center;box-sizing:border-box;
+  }
+  .pack-badge{right:24px;}
+  .cat-card{padding:32px 22px;}
+  .contact-card{padding:14px 16px;gap:12px;}
+  .service-item{padding:24px 20px;}
+  .about-visual .frame-label{font-size:18px;left:16px;bottom:16px;}
+  .gal-grid{columns:2 140px;column-gap:12px;}
+  .foot-grid{gap:36px;}
+  footer{padding:56px 18px 24px;}
+  .floaters{right:16px;bottom:16px;gap:10px;}
+  .fab{width:46px;height:46px;}
+  .book-quick{gap:10px;}
+  .quick-link{padding:14px 16px;}
+}
+@media(max-width:400px){
+  .logo-text{font-size:16px;}
+  .logo-text b{font-size:12.5px;letter-spacing:2px;}
+  .logo svg{width:28px;height:28px;}
+  header{padding:16px 16px;}
+  header.scrolled{padding:10px 16px;}
+  .hero h1{letter-spacing:0;}
+  .hero-actions{gap:12px;}
+  .hero-actions a{padding:14px 24px;font-size:11.5px;}
+  .gal-grid{columns:2 120px;}
+  .counters{gap:16px;}
+}
+
+/* Mobile menu overlay */
+#mobileMenu{
+  position:fixed;inset:0;background:var(--ink);z-index:105;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;
+  transform:translateY(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);
+}
+#mobileMenu.open{transform:translateY(0);}
+#mobileMenu a{font-family:var(--serif);font-size:28px;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="mark">Saini Makeover</div>
+  <div class="bar"><span></span></div>
+</div>
+
+<div id="glow"></div>
+
+<!-- ===================== NAV ===================== -->
+<header id="siteHeader">
+  <a href="#home" class="logo">
+    <svg viewBox="0 0 48 48" fill="none">
+      <path d="M24 4C20 10 14 12 14 20C14 27 18.5 31 24 34C29.5 31 34 27 34 20C34 12 28 10 24 4Z" stroke="#d8b378" stroke-width="1.2"/>
+      <path d="M24 34V44" stroke="#d8b378" stroke-width="1.2"/>
+      <path d="M17 44H31" stroke="#d8b378" stroke-width="1.2"/>
+      <circle cx="24" cy="19" r="3.4" stroke="#d8b378" stroke-width="1"/>
+    </svg>
+    <span class="logo-text"><b>SAINI MAKEOVER</b>Beauty Salon</span>
+  </a>
+  <nav class="links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#packages">Packages</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="#booking" class="btn-ghost">Book Appointment</a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div id="mobileMenu">
+  <a href="#about" class="mm-link">About</a>
+  <a href="#services" class="mm-link">Services</a>
+  <a href="#packages" class="mm-link">Packages</a>
+  <a href="#gallery" class="mm-link">Gallery</a>
+  <a href="#reviews" class="mm-link">Reviews</a>
+  <a href="#booking" class="mm-link">Book Appointment</a>
+  <a href="#contact" class="mm-link">Contact</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <svg class="hero-paisley" viewBox="0 0 800 800" fill="none">
+    <path d="M400 60C300 160 220 200 220 340C220 460 310 540 400 620C490 540 580 460 580 340C580 200 500 160 400 60Z" stroke="#d8b378" stroke-width="0.6" opacity="0.5"/>
+    <circle cx="400" cy="340" r="230" stroke="#c1867d" stroke-width="0.4" opacity="0.35"/>
+  </svg>
+  <p class="eyebrow" data-fade>Panjaur · Near Panjpeer</p>
+  <h1>
+    <span class="line"><span>Where Beauty</span></span>
+    <span class="line"><span>Meets <em>Tradition</em></span></span>
+  </h1>
+  <p class="sub" data-fade>Hair, skin, bridal makeup, mehndi and nail artistry — crafted by Navpreet Kaur and her atelier, for every Punjabi celebration and everyday grace.</p>
+  <div class="hero-actions" data-fade>
+    <a href="#booking" class="btn-solid"><span>Book Appointment</span></a>
+    <a href="tel:+9176696304473" class="btn-ghost">Call Now</a>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line-el"><i></i></div></div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <svg viewBox="0 0 400 500" fill="none"><path d="M200 40C150 110 90 150 90 250C90 340 150 400 200 460C250 400 310 340 310 250C310 150 250 110 200 40Z" stroke="#d8b378" stroke-width="0.8"/></svg>
+      <span class="frame-label">Navpreet Kaur</span>
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow reveal">Our Story</p>
+      <h2 class="reveal" style="font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.5vw,48px);line-height:1.15;">5+ years of making Panjaur look and feel its best.</h2>
+      <div class="divider reveal"></div>
+      <p class="reveal">Saini Makeover began as a single chair and a promise — that every bride, every guest, every regular client walking in from Panjpeer Road would leave feeling like the most beautiful version of themselves. Five years on, that promise still runs the salon.</p>
+      <p class="reveal">Every treatment is built around hygiene, premium products and an artist's eye — whether it's a quiet Tuesday cleanup or a full bridal mehndi and makeup day.</p>
+      <p class="owner reveal">Navpreet Kaur<span>Founder &amp; Lead Artist</span></p>
+      <div class="counters">
+        <div class="counter reveal"><b data-count="2000">0</b><span>Happy Clients</span></div>
+        <div class="counter reveal"><b data-count="5">0</b><span>Years Experience</span></div>
+        <div class="counter reveal"><b data-count="100" data-suffix="%">0</b><span>Hygienic</span></div>
+        <div class="counter reveal"><b data-count="100" data-suffix="%">0</b><span>Premium Products</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services" class="services">
+  <div class="section-head reveal">
+    <p class="eyebrow">What We Do</p>
+    <h2>Five crafts, <em>one</em> standard of finish.</h2>
+    <p>From root to reception look — every category is its own discipline at Saini Makeover, staffed by artists who specialise in exactly that craft.</p>
+  </div>
+
+  <div class="cat-grid reveal">
+    <div class="cat-card" data-tab="hair"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 3c4 0 4 4 6 4s2-4 6-4c-1 6 1 8-1 12-1 2-3 2-4 6-1-4-3-4-4-6-2-4 0-6-1-2 0 0-3-4-2-10Z"/></svg><h3>Hair</h3><p>Cuts · Colour · Keratin · Botox</p></div>
+    <div class="cat-card" data-tab="skin"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><path d="M8 13c1 1.5 2.5 2 4 2s3-.5 4-2"/><circle cx="9" cy="10" r=".6" fill="currentColor"/><circle cx="15" cy="10" r=".6" fill="currentColor"/></svg><h3>Skin</h3><p>Facials · Cleanup · D-Tan</p></div>
+    <div class="cat-card" data-tab="makeup"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 3c3 0 3 3 6 3M15 21c-4-1-8-5-9-9C5 8 6 5 9 5c1 4 6 9 10 10-1 3-4 6-4 6Z"/></svg><h3>Makeup</h3><p>Bridal · HD · Airbrush</p></div>
+    <div class="cat-card" data-tab="mehndi"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3c-3 3-6 5-6 10a6 6 0 0 0 12 0c0-5-3-7-6-10Z"/><path d="M12 9v8M9 13h6"/></svg><h3>Mehndi</h3><p>Bridal · Bangle · Party</p></div>
+    <div class="cat-card" data-tab="nails"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2c1.5 3 4 5 4 9a4 4 0 0 1-8 0c0-4 2.5-6 4-9Z"/><path d="M12 15v7"/></svg><h3>Nails</h3><p>Gel · Acrylic · Chrome</p></div>
+    <div class="cat-card" data-tab="spa"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 20c2-6 4-8 8-8s6 2 8 8"/><circle cx="12" cy="6" r="2.6"/></svg><h3>Spa &amp; Waxing</h3><p>Threading · Waxing · Spa</p></div>
+  </div>
+
+  <div class="service-tabs">
+    <button class="tab-btn active" data-target="hair">Hair</button>
+    <button class="tab-btn" data-target="skin">Skin</button>
+    <button class="tab-btn" data-target="makeup">Makeup</button>
+    <button class="tab-btn" data-target="mehndi">Mehndi</button>
+    <button class="tab-btn" data-target="nails">Nails</button>
+    <button class="tab-btn" data-target="spa">Spa &amp; Waxing</button>
+  </div>
+
+  <div class="tab-panel active" id="hair">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Hair Spa</h4><p>Deep nourishment &amp; scalp therapy</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Hair Cut &amp; Style</h4><p>Precision cutting, tailored to face shape</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Blow Dry</h4><p>Salon-finish volume and shine</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Smoothening</h4><p>Frizz-free, silky straight finish</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Keratin Treatment</h4><p>Long-lasting smoothness &amp; repair</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Kerasmooth</h4><p>Gentle keratin-infused straightening</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">07</span><h4>Global Colour</h4><p>Full head colour, custom shade match</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">08</span><h4>Highlights</h4><p>Dimension &amp; face-framing tones</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">09</span><h4>Hair Botox</h4><p>Deep repair without the flat-iron</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">10</span><h4>Protein Treatment</h4><p>Strength &amp; elasticity restored</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="skin">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Cleanup</h4><p>Fresh, deep-pore reset</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Bleach</h4><p>Even-toned, brightened skin</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Fruit Facial</h4><p>Gentle, vitamin-rich glow</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Vitamin C Facial</h4><p>Brightening &amp; even tone</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Gold Facial</h4><p>24K radiance ritual</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Skin Whitening Facial</h4><p>Deep brightening therapy</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">07</span><h4>Hydra Facial</h4><p>Deep hydration, instant glow</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">08</span><h4>D-Tan</h4><p>Sun damage reversed, tone restored</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="makeup">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Bridal Makeup</h4><p>Full day-of artistry &amp; draping</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Engagement Makeup</h4><p>Soft glam for the ring ceremony</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Party Makeup</h4><p>Bold, photo-ready looks</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>HD Makeup</h4><p>Flawless finish, camera-perfect</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Airbrush Makeup</h4><p>Featherlight, 12-hour wear</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Reception Makeup</h4><p>Statement glam for the big evening</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="mehndi">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Bridal Mehndi</h4><p>Intricate full hand &amp; feet artistry</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Engagement Mehndi</h4><p>Elegant mid-detail patterns</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Party Mehndi</h4><p>Quick, festive designs</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Full Hand Mehndi</h4><p>Wrist to fingertip coverage</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Bangle Mehndi</h4><p>Delicate wrist &amp; band motifs</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">06</span><h4>Simple Mehndi</h4><p>Clean, minimal everyday designs</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="nails">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Gel Extension</h4><p>Durable, glass-like finish</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Acrylic Extension</h4><p>Strong, sculpted shape</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Temporary Nails</h4><p>Press-on elegance, event-ready</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>French Nails</h4><p>Timeless tip-classic finish</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">05</span><h4>Chrome Nails</h4><p>Mirror-metallic statement</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="spa">
+    <div class="service-list">
+      <div class="service-item"><span class="num">01</span><h4>Waxing</h4><p>Full body, smooth &amp; gentle</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">02</span><h4>Threading</h4><p>Precision brow &amp; face shaping</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">03</span><h4>Body Spa</h4><p>Full relaxation &amp; rejuvenation</p><span class="arrow">→</span></div>
+      <div class="service-item"><span class="num">04</span><h4>Hair Treatments</h4><p>Restorative scalp &amp; strand care</p><span class="arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PACKAGES ===================== -->
+<section id="packages" class="packages">
+  <div class="section-head reveal">
+    <p class="eyebrow">Curated Bundles</p>
+    <h2>Packages for every <em>occasion</em>.</h2>
+    <p>Two signature bundles, priced to make your celebration effortless. Ask in-salon for custom combinations.</p>
+  </div>
+  <div class="pack-grid reveal">
+    <div class="pack-card featured">
+      <span class="pack-badge">Most Booked</span>
+      <h3>Bridal Package</h3>
+      <span class="tag">Full Day Coverage</span>
+      <ul class="pack-list">
+        <li>HD / Airbrush Bridal Makeup <b>Included</b></li>
+        <li>Bridal Hairstyling &amp; Draping <b>Included</b></li>
+        <li>Pre-bridal Facial &amp; Cleanup <b>Included</b></li>
+        <li>Bridal Mehndi (Hands &amp; Feet) <b>Included</b></li>
+        <li>Gel Nail Extension <b>Add-on</b></li>
+        <li>Hair Spa &amp; Blow Dry <b>Included</b></li>
+      </ul>
+      <p class="pack-note">Price on consultation — every bride's look is quoted individually.</p>
+      <a href="#booking" class="btn-solid"><span>Enquire for Bridal</span></a>
+    </div>
+    <div class="pack-card">
+      <h3>Festival Package</h3>
+      <span class="tag">Celebration Ready</span>
+      <ul class="pack-list">
+        <li>Party Makeup <b>Included</b></li>
+        <li>Hair Styling <b>Included</b></li>
+        <li>Threading &amp; Cleanup <b>Included</b></li>
+        <li>Simple / Bangle Mehndi <b>Included</b></li>
+        <li>French or Temporary Nails <b>Add-on</b></li>
+      </ul>
+      <p class="pack-note">Ideal for Karva Chauth, Lohri, Diwali &amp; family functions.</p>
+      <a href="#booking" class="btn-ghost">Enquire for Festival</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BEFORE / AFTER + GALLERY ===================== -->
+<section id="gallery" class="gallery">
+  <div class="section-head reveal">
+    <p class="eyebrow">The Portfolio</p>
+    <h2>A glimpse of the <em>artistry</em>.</h2>
+    <p>Drag the slider to see a transformation, then browse the studio's work across every craft.</p>
+  </div>
+
+  <div class="ba-wrap reveal" style="margin-bottom:80px;">
+    <div class="ba-slider" id="baSlider">
+      <div class="ba-before"><span class="ba-label">Before</span><span class="ba-sub">Natural Texture</span></div>
+      <div class="ba-after" id="baAfter"><span class="ba-label">After</span><span class="ba-sub">Saini Makeover Finish</span></div>
+      <div class="ba-handle" id="baHandle"></div>
+      <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50">
+    </div>
+  </div>
+
+  <div class="gal-filters reveal">
+    <button class="tab-btn active" data-gal="all">All</button>
+    <button class="tab-btn" data-gal="hair">Hair</button>
+    <button class="tab-btn" data-gal="makeup">Makeup</button>
+    <button class="tab-btn" data-gal="mehndi">Mehndi</button>
+    <button class="tab-btn" data-gal="nails">Nails</button>
+    <button class="tab-btn" data-gal="skin">Skin</button>
+  </div>
+
+  <div class="gal-grid reveal" id="galGrid"></div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section id="reviews" class="testimonials">
+  <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;">
+    <p class="eyebrow">Client Voices</p>
+    <h2>Loved across <em>Panjaur</em>.</h2>
+  </div>
+  <div class="t-track-wrap reveal">
+    <div class="t-slide active">
+      <div class="stars">★★★★★</div>
+      <p>My bridal mehndi and makeup were flawless — Navpreet ji understood exactly what I wanted before I even finished explaining it.</p>
+      <span class="who">— Bridal Client, Panjaur</span>
+    </div>
+    <div class="t-slide">
+      <div class="stars">★★★★★</div>
+      <p>The hair spa here is unmatched. I've tried salons across the district and nothing compares to how gentle and thorough they are.</p>
+      <span class="who">— Regular Client</span>
+    </div>
+    <div class="t-slide">
+      <div class="stars">★★★★★</div>
+      <p>Booked the Festival Package for Karva Chauth — mehndi, makeup and nails all done beautifully in one visit.</p>
+      <span class="who">— Festival Package Client</span>
+    </div>
+    <div class="t-slide">
+      <div class="stars">★★★★★</div>
+      <p>Hygiene and premium products, exactly as promised. My skin has never looked this even after a Gold Facial.</p>
+      <span class="who">— Skin Care Client</span>
+    </div>
+    <div class="t-dots" id="tDots"></div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING ===================== -->
+<section id="booking" class="booking">
+  <div class="book-grid">
+    <div class="book-info reveal">
+      <p class="eyebrow">Reserve Your Slot</p>
+      <h3>Book your appointment.</h3>
+      <p>Fill in the form and our team will confirm your slot over WhatsApp or a call. For same-day bookings, calling directly is fastest.</p>
+      <div class="book-quick">
+        <a class="quick-link" href="https://wa.me/9176696304473" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2Zm5.9 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.2-3.7-.8-3.1-1.3-5.1-4.4-5.3-4.6-.1-.2-1.3-1.7-1.3-3.2 0-1.5.8-2.3 1.1-2.6.3-.3.6-.4.9-.4h.6c.2 0 .5 0 .7.5.3.7.9 2.2.9 2.4.1.2.1.4 0 .6-.4.9-.9 1-.6 1.5.9 1.7 1.9 2.3 3.4 3 .3.1.5.1.6-.1.2-.2.7-.9.9-1.2.2-.3.4-.2.7-.1.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.9-.2 1.6Z"/></svg>
+          <span><b>WhatsApp Us</b><span>Fastest response</span></span>
+        </a>
+        <a class="quick-link" href="tel:+9176696304473">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 5c0 8.8 7.2 16 16 16l3-3c.6-.6.6-1.6 0-2.2l-3.5-3.5c-.6-.6-1.6-.6-2.2 0l-1 1c-2-1-3.8-2.8-4.8-4.8l1-1c.6-.6.6-1.6 0-2.2L9 5.9c-.6-.6-1.6-.6-2.2 0L4 8"/></svg>
+          <span><b>Call Now</b><span>76696304473</span></span>
+        </a>
+      </div>
+    </div>
+    <form class="book-form reveal" id="bookingForm">
+      <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name"></div>
+      <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number"></div>
+      <div class="field"><label>Service</label>
+        <select name="Service" required>
+          <option value="">Select a service</option>
+          <option>Hair</option><option>Skin</option><option>Makeup</option>
+          <option>Mehndi</option><option>Nails</option><option>Bridal Package</option><option>Festival Package</option>
+        </select>
+      </div>
+      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date"></div>
+      <div class="field full"><label>Preferred Time</label><input type="time" name="Preferred Time"></div>
+      <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..."></textarea></div>
+      <div class="submit-row"><button type="submit" class="btn-solid"><span>Book Appointment</span></button></div>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="contact">
+  <div class="section-head reveal">
+    <p class="eyebrow">Visit Us</p>
+    <h2>Find your way to <em>Saini Makeover</em>.</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <span><b>Address</b><span>Near Panjpeer, Saini Makeover Beauty Salon, Panjaur</span></span>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 5c0 8.8 7.2 16 16 16l3-3c.6-.6.6-1.6 0-2.2l-3.5-3.5c-.6-.6-1.6-.6-2.2 0l-1 1c-2-1-3.8-2.8-4.8-4.8l1-1c.6-.6.6-1.6 0-2.2L9 5.9c-.6-.6-1.6-.6-2.2 0L4 8"/></svg>
+        <span><b>Phone</b><span>76696304473</span></span>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <span><b>Opening Hours</b><span>Mon – Sun · 10:00 AM – 8:00 PM</span></span>
+      </div>
+      <div class="contact-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span><b>Follow / Message</b><span>Instagram · Facebook · WhatsApp</span></span>
+      </div>
+    </div>
+    <div class="map-box reveal">
+      <iframe src="https://www.google.com/maps?q=Panjpeer%20Panjaur&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">Saini Makeover</div>
+      <p>Luxury hair, skin, makeup, mehndi and nail artistry — near Panjpeer, Panjaur. Founded and led by Navpreet Kaur.</p>
+      <form class="newsletter" id="newsletterForm"><input type="email" id="newsletterEmail" required placeholder="Your email for offers"><button type="submit">Join</button></form>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#packages">Packages</a></li><li><a href="#gallery">Gallery</a></li></ul>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul><li><a href="#hair" class="footer-tab-link" data-tab="hair">Hair</a></li><li><a href="#skin" class="footer-tab-link" data-tab="skin">Skin</a></li><li><a href="#makeup" class="footer-tab-link" data-tab="makeup">Makeup</a></li><li><a href="#mehndi" class="footer-tab-link" data-tab="mehndi">Mehndi</a></li></ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li>Near Panjpeer, Panjaur</li>
+        <li>76696304473</li>
+        <li>Mon – Sun, 10 AM – 8 PM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Saini Makeover Beauty Salon. All rights reserved.</span>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/saini_makeover_beauty_salon769" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></svg></a>
+      <a href="https://wa.me/9176696304473" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2Z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="floaters">
+  <a class="fab top" id="toTop" href="#home" aria-label="Scroll to top">↑</a>
+  <a class="fab call" href="tel:+9176696304473" aria-label="Call now">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5c0 8.8 7.2 16 16 16l3-3c.6-.6.6-1.6 0-2.2l-3.5-3.5c-.6-.6-1.6-.6-2.2 0l-1 1c-2-1-3.8-2.8-4.8-4.8l1-1c.6-.6.6-1.6 0-2.2L9 5.9c-.6-.6-1.6-.6-2.2 0L4 8"/></svg>
+  </a>
+  <a class="fab whatsapp" href="https://wa.me/9176696304473" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2Zm5.9 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.2-3.7-.8-3.1-1.3-5.1-4.4-5.3-4.6-.1-.2-1.3-1.7-1.3-3.2 0-1.5.8-2.3 1.1-2.6.3-.3.6-.4.9-.4h.6c.2 0 .5 0 .7.5.3.7.9 2.2.9 2.4.1.2.1.4 0 .6-.4.9-.9 1-.6 1.5.9 1.7 1.9 2.3 3.4 3 .3.1.5.1.6-.1.2-.2.7-.9.9-1.2.2-.3.4-.2.7-.1.3.1 1.9.9 2.2 1.1.3.1.5.2.6.3.1.2.1.9-.2 1.6Z"/></svg>
+  </a>
+</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- Loader ---------- */
+window.addEventListener('load', () => {
+  const tl = gsap.timeline({
+    onComplete(){
+      document.getElementById('loader').style.display='none';
+      playHero();
+    }
+  });
+  tl.to('#loader .mark',{opacity:1,duration:.6,ease:'power2.out'})
+    .to('#loader .bar span',{width:'100%',duration:1,ease:'power2.inOut'},'-=.2')
+    .to('#loader',{opacity:0,duration:.6,ease:'power2.inOut'},'+=.15');
+});
+
+function playHero(){
+  const tl = gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.to('.eyebrow[data-fade]',{opacity:1,y:0,duration:.7})
+    .to('.hero h1 .line span',{y:'0%',duration:1.1,stagger:.12},'-=.4')
+    .to('.hero .sub',{opacity:1,y:0,duration:.9},'-=.6')
+    .to('.hero-actions',{opacity:1,y:0,duration:.8},'-=.6');
+}
+gsap.set('.hero .sub, .hero-actions',{y:20});
+
+/* ---------- Nav scroll state ---------- */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('toTop').classList.toggle('show', window.scrollY > 700);
+});
+
+/* ---------- Mobile menu ---------- */
+const burger = document.getElementById('burgerBtn');
+const mm = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => mm.classList.toggle('open'));
+document.querySelectorAll('.mm-link').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+/* ---------- Cursor glow ---------- */
+const glow = document.getElementById('glow');
+window.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+/* ---------- Reveal on scroll ---------- */
+gsap.utils.toArray('.reveal').forEach(el => {
+  gsap.to(el,{
+    opacity:1,y:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%'}
+  });
+});
+
+/* ---------- Counters ---------- */
+gsap.utils.toArray('.counter b').forEach(el => {
+  const end = parseInt(el.dataset.count,10);
+  const suffix = el.dataset.suffix || '+';
+  ScrollTrigger.create({
+    trigger: el, start:'top 90%', once:true,
+    onEnter(){
+      gsap.fromTo(el,{innerText:0},{
+        innerText:end, duration:1.6, ease:'power1.out', snap:{innerText:1},
+        onUpdate(){ el.innerText = Math.floor(el.innerText) + suffix; }
+      });
+    }
+  });
+});
+
+/* ---------- Service tabs ---------- */
+document.querySelectorAll('.tab-btn[data-target]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn[data-target]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+document.querySelectorAll('.cat-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const target = card.dataset.tab;
+    document.querySelector(`.tab-btn[data-target="${target}"]`).click();
+    document.getElementById(target).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+/* ---------- Footer service links -> open matching tab ---------- */
+document.querySelectorAll('.footer-tab-link[data-tab]').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const target = link.dataset.tab;
+    const tabBtn = document.querySelector(`.tab-btn[data-target="${target}"]`);
+    if(tabBtn) tabBtn.click();
+    document.getElementById('services').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+/* ---------- Newsletter form ---------- */
+document.getElementById('newsletterForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const emailInput = document.getElementById('newsletterEmail');
+  const btn = e.target.querySelector('button');
+  if(!emailInput.value || !emailInput.checkValidity()){
+    emailInput.focus();
+    return;
+  }
+  const originalText = btn.textContent;
+  btn.textContent = 'Subscribed ✓';
+  emailInput.value = '';
+  setTimeout(()=>{ btn.textContent = originalText; }, 2500);
+});
+
+/* ---------- Before / After slider ---------- */
+const baAfter = document.getElementById('baAfter');
+const baHandle = document.getElementById('baHandle');
+const baRange = document.getElementById('baRange');
+function setBA(val){
+  baAfter.style.clipPath = `inset(0 0 0 ${val}%)`;
+  baHandle.style.left = val + '%';
+}
+baRange.addEventListener('input', e => setBA(100 - e.target.value));
+setBA(50);
+
+/* ---------- Gallery generation ---------- */
+const galleryData = [
+  {cat:'hair', label:'Global Colour', r:'3/4'},
+  {cat:'makeup', label:'Bridal Glam', r:'4/5'},
+  {cat:'mehndi', label:'Bridal Mehndi', r:'3/4'},
+  {cat:'nails', label:'Chrome Finish', r:'1/1'},
+  {cat:'skin', label:'Gold Facial Glow', r:'4/5'},
+  {cat:'hair', label:'Keratin Smoothening', r:'4/5'},
+  {cat:'makeup', label:'HD Reception Look', r:'3/4'},
+  {cat:'mehndi', label:'Engagement Mehndi', r:'1/1'},
+  {cat:'nails', label:'French Elegance', r:'4/5'},
+  {cat:'hair', label:'Hair Botox Result', r:'3/4'},
+  {cat:'skin', label:'Hydra Facial', r:'1/1'},
+  {cat:'makeup', label:'Airbrush Bridal', r:'4/5'},
+];
+const icons = {
+  hair:'<path d="M6 3c4 0 4 4 6 4s2-4 6-4c-1 6 1 8-1 12-1 2-3 2-4 6-1-4-3-4-4-6-2-4 0-6-1-2 0 0-3-4-2-10Z"/>',
+  skin:'<circle cx="12" cy="12" r="9"/>',
+  makeup:'<path d="M9 3c3 0 3 3 6 3M15 21c-4-1-8-5-9-9C5 8 6 5 9 5c1 4 6 9 10 10-1 3-4 6-4 6Z"/>',
+  mehndi:'<path d="M12 3c-3 3-6 5-6 10a6 6 0 0 0 12 0c0-5-3-7-6-10Z"/>',
+  nails:'<path d="M12 2c1.5 3 4 5 4 9a4 4 0 0 1-8 0c0-4 2.5-6 4-9Z"/>'
+};
+const galGrid = document.getElementById('galGrid');
+function renderGallery(filter){
+  galGrid.innerHTML = '';
+  galleryData.filter(g => filter==='all' || g.cat===filter).forEach(g=>{
+    const div = document.createElement('div');
+    div.className = 'gal-item';
+    div.innerHTML = `<div class="ph" style="--r:${g.r}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">${icons[g.cat]}</svg><span>${g.label}</span></div>`;
+    galGrid.appendChild(div);
+  });
+}
+renderGallery('all');
+document.querySelectorAll('.tab-btn[data-gal]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn[data-gal]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery(btn.dataset.gal);
+  });
+});
+
+/* ---------- Testimonial carousel ---------- */
+const slides = document.querySelectorAll('.t-slide');
+const dotsWrap = document.getElementById('tDots');
+slides.forEach((_,i)=>{
+  const b = document.createElement('button');
+  if(i===0) b.classList.add('active');
+  b.addEventListener('click', ()=>showSlide(i));
+  dotsWrap.appendChild(b);
+});
+let tIndex = 0;
+function showSlide(i){
+  slides[tIndex].classList.remove('active');
+  dotsWrap.children[tIndex].classList.remove('active');
+  tIndex = i;
+  slides[tIndex].classList.add('active');
+  dotsWrap.children[tIndex].classList.add('active');
+}
+setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
+
+/* ---------- Booking form ---------- */
+const FORMSPREE_ID = 'YOUR_FORM_ID'; // <- replace with your Formspree form ID
+document.getElementById('bookingForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const form = e.target;
+  const inputs = form.querySelectorAll('input,select,textarea');
+  const [name, phone, service, date, time, message] = inputs;
+
+  // Email the booking to the salon via Formspree (fire-and-forget)
+  if(FORMSPREE_ID && FORMSPREE_ID !== 'YOUR_FORM_ID'){
+    try{
+      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: {'Accept': 'application/json'},
+        body: new FormData(form)
+      });
+    }catch(err){
+      console.error('Booking email failed to send:', err);
+    }
+  }
+
+  // Also hand off to WhatsApp so the client can message directly
+  const text = `Hi Saini Makeover, I'd like to book an appointment.%0AName: ${encodeURIComponent(name.value)}%0APhone: ${encodeURIComponent(phone.value)}%0AService: ${encodeURIComponent(service.value)}%0ADate: ${date.value}%0ATime: ${time.value}%0AMessage: ${encodeURIComponent(message.value)}`;
+  window.open(`https://wa.me/9176696304473?text=${text}`, '_blank');
+});
+</script>
+</body>
+</html>
