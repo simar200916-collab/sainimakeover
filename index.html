@@ -1275,8 +1275,54 @@ function showSlide(i){
 setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
 
 /* ---------- Booking form ---------- */
-window.formspree = window.formspree || function(){ (formspree.q = formspree.q || []).push(arguments); };
-formspree('initForm', { formElement: '#bookingForm', formId: 'mwvgwaqe' });
+(function(){
+  const form    = document.getElementById('bookingForm');
+  const success = document.querySelector('[data-fs-success]');
+  const errBox  = document.querySelector('[data-fs-error]');
+  if(!form) return;
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = form.querySelector('[data-fs-submit-btn]');
+    const btnText = btn.querySelector('span');
+    const original = btnText.textContent;
+
+    // Reset state
+    success.style.display = 'none';
+    errBox.style.display  = 'none';
+    btn.disabled = true;
+    btnText.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('https://formspree.io/f/mwvgwaqe', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      const data = await res.json();
+
+      if(res.ok){
+        success.style.display = 'block';
+        form.reset();
+        // Scroll success message into view
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        const msg = (data.errors && data.errors.map(x => x.message).join(', '))
+                    || 'Something went wrong. Please try again or WhatsApp us directly.';
+        errBox.textContent = '⚠ ' + msg;
+        errBox.style.display = 'block';
+        errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } catch(err) {
+      errBox.textContent = '⚠ Could not send your booking. Please check your connection and try again, or WhatsApp us at +91 76963 04473.';
+      errBox.style.display = 'block';
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    btn.disabled = false;
+    btnText.textContent = original;
+  });
+})();
 
 // Prevent past-date bookings: set today as the earliest selectable date
 (function(){
@@ -1291,6 +1337,5 @@ formspree('initForm', { formElement: '#bookingForm', formId: 'mwvgwaqe' });
 })();
 
 </script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
