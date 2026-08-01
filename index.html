@@ -917,7 +917,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
           <option>Mehndi</option><option>Nails</option><option>Bridal Package</option><option>Festival Package</option>
         </select>
       </div>
-      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" data-fs-field></div>
+      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" id="bookingDate" data-fs-field></div>
       <div class="field full"><label>Preferred Time</label><input type="time" name="Preferred Time" data-fs-field></div>
       <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..." data-fs-field></textarea></div>
       <div class="submit-row"><button type="submit" class="btn-solid" data-fs-submit-btn><span>Book Appointment</span></button></div>
@@ -1274,6 +1274,18 @@ setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
 /* ---------- Booking form ---------- */
 window.formspree = window.formspree || function(){ (formspree.q = formspree.q || []).push(arguments); };
 formspree('initForm', { formElement: '#bookingForm', formId: 'mwvgwaqe' });
+
+// Prevent past-date bookings: set today as the earliest selectable date
+(function(){
+  const dateInput = document.getElementById('bookingDate');
+  if(dateInput){
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm   = String(today.getMonth() + 1).padStart(2,'0');
+    const dd   = String(today.getDate()).padStart(2,'0');
+    dateInput.min = yyyy + '-' + mm + '-' + dd;
+  }
+})();
 
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
