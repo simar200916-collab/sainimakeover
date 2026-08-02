@@ -913,6 +913,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
     <form class="book-form reveal" id="bookingForm">
       <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name" data-fs-field></div>
       <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number" data-fs-field></div>
+      <div class="field"><label>Email</label><input type="email" name="email" required placeholder="your@email.com" data-fs-field></div>
       <div class="field"><label>Service</label>
         <select name="Service" required data-fs-field>
           <option value="">Select a service</option>
@@ -921,7 +922,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
         </select>
       </div>
       <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" id="bookingDate" data-fs-field></div>
-      <div class="field full"><label>Preferred Time</label><input type="time" name="Preferred Time" data-fs-field></div>
+      <div class="field"><label>Preferred Time</label><input type="time" name="Preferred Time" data-fs-field></div>
       <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..." data-fs-field></textarea></div>
       <div class="submit-row"><button type="submit" class="btn-solid" data-fs-submit-btn><span>Book Appointment</span></button></div>
     </form>
