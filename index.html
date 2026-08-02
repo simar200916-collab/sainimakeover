@@ -911,20 +911,25 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:70px clamp
     </div>
     <div data-fs-error style="display:none;grid-column:1/-1;padding:16px;border:1px solid var(--rosegold);color:var(--rosegold);font-size:13px;border-radius:2px;"></div>
     <form class="book-form reveal" id="bookingForm">
-      <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name" data-fs-field></div>
-      <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number" data-fs-field></div>
-      <div class="field"><label>Email</label><input type="email" name="email" required placeholder="your@email.com" data-fs-field></div>
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="New Booking Request – Saini Makeover">
+      <input type="hidden" name="_autoresponse" value="Thank you for reaching out to Saini Makeover! Your booking request has been received. We will contact you shortly on WhatsApp or by call to confirm your slot.">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <div class="field"><label>Full Name</label><input type="text" name="Full Name" required placeholder="Your name"></div>
+      <div class="field"><label>Phone</label><input type="tel" name="Phone" required placeholder="10-digit number"></div>
+      <div class="field"><label>Email</label><input type="email" name="email" required placeholder="your@email.com"></div>
       <div class="field"><label>Service</label>
-        <select name="Service" required data-fs-field>
+        <select name="Service" required>
           <option value="">Select a service</option>
           <option>Hair</option><option>Skin</option><option>Makeup</option>
           <option>Mehndi</option><option>Nails</option><option>Bridal Package</option><option>Festival Package</option>
         </select>
       </div>
-      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" id="bookingDate" data-fs-field></div>
-      <div class="field"><label>Preferred Time</label><input type="time" name="Preferred Time" data-fs-field></div>
-      <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..." data-fs-field></textarea></div>
-      <div class="submit-row"><button type="submit" class="btn-solid" data-fs-submit-btn><span>Book Appointment</span></button></div>
+      <div class="field"><label>Preferred Date</label><input type="date" name="Preferred Date" id="bookingDate"></div>
+      <div class="field"><label>Preferred Time</label><input type="time" name="Preferred Time"></div>
+      <div class="field full"><label>Message</label><textarea name="Message" placeholder="Tell us anything we should know..."></textarea></div>
+      <div class="submit-row"><button type="submit" class="btn-solid"><span>Book Appointment</span></button></div>
     </form>
   </div>
 </section>
@@ -1295,21 +1300,20 @@ setInterval(()=> showSlide((tIndex+1) % slides.length), 5000);
     btnText.textContent = 'Sending…';
 
     try {
-      const res = await fetch('https://formspree.io/f/mwvgwaqe', {
+      const res = await fetch('https://formsubmit.co/ajax/1604simarpreet@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       });
       const data = await res.json();
 
-      if(res.ok){
+      if(data.success === 'true' || data.success === true){
         success.style.display = 'block';
         form.reset();
         // Scroll success message into view
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        const msg = (data.errors && data.errors.map(x => x.message).join(', '))
-                    || 'Something went wrong. Please try again or WhatsApp us directly.';
+        const msg = data.message || 'Something went wrong. Please try again or WhatsApp us directly.';
         errBox.textContent = '⚠ ' + msg;
         errBox.style.display = 'block';
         errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
